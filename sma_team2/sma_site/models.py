@@ -34,7 +34,7 @@ class PasswordReset(models.Model):
     expires_at = models.DateTimeField
 
 
-class Social(models.Model):
+class UserSocial(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     facebook_link = models.CharField(max_length=100)
