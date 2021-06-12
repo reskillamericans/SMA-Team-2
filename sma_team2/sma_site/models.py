@@ -20,6 +20,10 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        self.name = self.first_name + " " + self.last_name
+        return self.name
+
 
 class PasswordReset(models.Model):
     id = models.AutoField(primary_key=True)
