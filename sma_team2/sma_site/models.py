@@ -4,7 +4,7 @@ from datetime import datetime
 # Create your models here.
 
 
-class Users(models.Model):
+class User(models.Model):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=50, unique=True)
@@ -21,18 +21,18 @@ class Users(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class PasswordResets(models.Model):
+class PasswordReset(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     token = models.CharField(max_length=50, unique=True)
     token_used = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField
 
 
-class Socials(models.Model):
+class Social(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     facebook_link = models.CharField(max_length=100)
     instagram_link = models.CharField(max_length=100)
     twitter_link = models.CharField(max_length=100)
@@ -42,53 +42,53 @@ class Socials(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Messages(models.Model):
+class Message(models.Model):
     id = models.AutoField(primary_key=True)
-    receiver_id = models.ManyToManyField(Users, related_name="message_receiver")
-    sender_id = models.ManyToManyField(Users, related_name="message_sender")
+    receiver_id = models.ManyToManyField(User, related_name="message_receiver")
+    sender_id = models.ManyToManyField(User, related_name="message_sender")
     content = models.TextField
     read_at = models.DateTimeField
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Followers(models.Model):
+class Follower(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ManyToManyField(Users, related_name="following")
-    follower_id = models.ManyToManyField(Users, related_name="follower")
+    user_id = models.ManyToManyField(User, related_name="following")
+    follower_id = models.ManyToManyField(User, related_name="follower")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class PostCategories(models.Model):
+class PostCategory(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Posts(models.Model):
+class Post(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    post_category_id = models.ForeignKey(PostCategories, null=True, on_delete=models.SET_NULL)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL)
     content = models.TextField
     likes = models.IntegerField
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class PostComments(models.Model):
+class PostComment(models.Model):
     id = models.AutoField(primary_key=True)
-    commenter_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    post_id = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    commenter_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class PostLikes(models.Model):
+class PostLike(models.Model):
     id = models.AutoField(primary_key=True)
-    liker_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    post_id = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    liker_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
