@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages #import messages
+from .models import User
 
 # Create your views here.
 
@@ -11,13 +11,32 @@ def index(request):
 	return render (request=request, template_name="home.html")
 
 def register_request(request):
-	if request.method == "POST":
-		form = NewUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect("index")
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		confirmpwd = request.POST['conf_password']
+		first_name = request.POST['first_name']
+		last_name = request.POST['last_name']
+		email = request.POST['email']
+		
+		if password == confirmpwd:
+			try:
+				user = User.objects.get(email=email)
+				messages.error(request, "Email already exists")
+				return redirect("register")
+			except User.DoesNotExist:
+				user = User.objects.create_user(email=email, username=username, password=password, first_name=first_name, last_name=last_name)
+				user.save()
+				messages.success(request, "Registration successful")
+				return redirect("index")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm
-	return render (request=request, template_name="register.html", context={"register_form":form})
+	return render(request=request, template_name="register.html")
+			
+
+                
+    #             return render(request, 'posts/create.html')  
+
+    #     else:
+    #             return render(request,'posts/create.html')
+    
+    # return render (request=request, template_name="register.html", context={"register_form":form})
