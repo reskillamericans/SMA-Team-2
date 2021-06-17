@@ -31,12 +31,3 @@ def register_request(request):
 				return redirect("index")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	return render(request=request, template_name="register.html")
-			
-
-                
-    #             return render(request, 'posts/create.html')  
-
-    #     else:
-    #             return render(request,'posts/create.html')
-    
-    # return render (request=request, template_name="register.html", context={"register_form":form})
