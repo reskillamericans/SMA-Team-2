@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import django_heroku
 
+# Extending User Model Using a Custom Model Extending AbstractUser
+# We have to update our settings.py defining the AUTH_USER_MODEL property.
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,9 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #application created by Kelvin
-    'SMA',
+    'Accounts',
+    'Details',
 
 ]
+
+AUTH_USER_MODEL = 'Accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
