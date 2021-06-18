@@ -37,6 +37,9 @@ def register_request(request):
 
 
 def login_request(request):
+	if request.user.is_authenticated:
+		return redirect("index")
+
 	if request.method == "POST":
 		form = AuthenticationForm(request, data=request.POST)
 		if form.is_valid():
@@ -50,6 +53,5 @@ def login_request(request):
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
-			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()		
+			messages.error(request,"Invalid username or password.")	
 	return render(request=request, template_name="login.html")	
