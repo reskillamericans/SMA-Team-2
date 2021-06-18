@@ -6,7 +6,7 @@
 <!--Login--> 
 <div class="container py-5">
 	<h1>Login</h1>
-	<form action="{% url 'register' %}" method="POST">
+	<form action="{% url 'login' %}" method="POST">
 		{% csrf_token %}
 		Username: <input type="text" name="username" required/><br/>
 		Password: <input type="password" name="password" required/><br/>
