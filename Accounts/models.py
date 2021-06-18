@@ -23,8 +23,8 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        self.name = self.first_name + " " + self.last_name
-        return self.name
+        # self.name = self.first_name + " " + self.last_name
+        return self.email
 
 
 class UserSocial(models.Model):
