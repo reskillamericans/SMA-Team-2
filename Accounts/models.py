@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
 # Create your models here.
@@ -39,3 +40,10 @@ class UserSocial(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+class PasswordReset(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    token = models.CharField(max_length=50, unique=True)
+    token_used = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField
