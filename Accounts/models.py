@@ -7,18 +7,22 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    class AccountStatus(models.TextChoices):
+        LOCKED = 'Locked', 'Locked'
+        UNLOCKED = 'Unlocked', 'Unlocked'
+
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    occupation = models.CharField(max_length=255, null=True)
-    bio = models.TextField(null=True)
+    occupation = models.CharField(max_length=255, null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
     verified = models.BooleanField(default=False)
-    status = models.CharField(max_length=255)
-    followers_count = models.IntegerField
-    follows_count = models.IntegerField
+    account_status = models.CharField(max_length=10, choices=AccountStatus.choices, default=AccountStatus.UNLOCKED)
+    followers_count = models.IntegerField(default=0)
+    follows_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -30,11 +34,11 @@ class User(AbstractUser):
 class UserSocial(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
-    facebook_link = models.CharField(max_length=255)
-    instagram_link = models.CharField(max_length=255)
-    twitter_link = models.CharField(max_length=255)
-    linkedin_link = models.CharField(max_length=255)
-    github_link = models.CharField(max_length=255)
+    facebook_link = models.CharField(max_length=255, blank=True)
+    instagram_link = models.CharField(max_length=255, blank=True)
+    twitter_link = models.CharField(max_length=255, blank=True)
+    linkedin_link = models.CharField(max_length=255, blank=True)
+    github_link = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

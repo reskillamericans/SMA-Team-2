@@ -11,25 +11,34 @@ class PasswordReset(models.Model):
     token = models.CharField(max_length=50, unique=True)
     token_used = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField
+    expires_at = models.DateTimeField(null=True)
+
+    class Meta:
+        ordering = ['user_id']
 
 
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
+    sender_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="message_sender", on_delete=models.DO_NOTHING, null=True)
     receiver_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="message_receiver")
-    sender_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="message_sender")
-    content = models.TextField
-    read_at = models.DateTimeField
+    content = models.TextField(null=True)
+    read_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 class Follower(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="following")
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="following", on_delete=models.CASCADE, null=True)
     follower_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="follower")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['user_id']
 
 
 class PostCategory(models.Model):
@@ -38,24 +47,41 @@ class PostCategory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "Post Categories"
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL)
-    content = models.TextField
-    likes = models.IntegerField
+    title = models.CharField(max_length=50, null=True)
+    post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL, blank=True)
+    content = models.TextField(null=True)
+    likes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
 
 
 class PostComment(models.Model):
     id = models.AutoField(primary_key=True)
-    commenter_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content = models.TextField
+    commenter_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 class PostLike(models.Model):

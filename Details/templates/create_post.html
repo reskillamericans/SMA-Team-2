@@ -1,0 +1,20 @@
+{% include "header.html" %}
+
+{% block content %} 
+  
+
+<!--Create_post-->
+<div class="container py-5">
+    <h1>Create a Post</h1>
+    <form action="{% url 'create_post' %}" method="POST">
+        {% csrf_token %}
+        Title: <input type="text" name="title" required/><br/>
+        Category: <input type="text" name="category"/><br/>
+        Content: <br/><textarea cols="35" rows="8" name="content" required></textarea><br/>
+        <input type="submit" value="Post"/>
+    </form>
+</div>
+
+
+
+{% endblock %}
