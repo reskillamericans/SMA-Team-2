@@ -14,6 +14,7 @@ class PasswordReset(models.Model):
     expires_at = models.DateTimeField(null=True)
 
     class Meta:
+        verbose_name_plural = "Password Resets"
         ordering = ['user_id']
 
 
@@ -57,7 +58,7 @@ class PostCategory(models.Model):
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET(None))
     title = models.CharField(max_length=50, null=True)
     post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL, blank=True)
     content = models.TextField(null=True)
@@ -81,6 +82,7 @@ class PostComment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        verbose_name_plural = "Post Comments"
         ordering = ['-created_at']
 
 
@@ -90,3 +92,6 @@ class PostLike(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Post Likes"

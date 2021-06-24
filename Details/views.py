@@ -24,7 +24,6 @@ def create_post(request):
 
 
 def get_category_id(category):
-
     if category == '':
         return None
     # If category exists, return category
@@ -37,3 +36,26 @@ def get_category_id(category):
         category.save()
         return category
 
+
+def delete_post(request, id):
+    if not request.user.is_authenticated:
+        return redirect("index")
+    post = Post.objects.get(id=id)
+    if request.user == post.user_id:
+        Post.objects.get(id=id).delete()
+    return redirect('index')
+
+
+def update_post(request, id):
+    if request.method == 'UPDATE':
+        post = Post.objects.get(id=id)
+        if request.user == post.user_id:
+            post_category_id = get_category_id(request.POST.get('category'))
+            if post_category_id is not None:
+                post.post_category_id = post_category_id
+            post.title = request.POST.get('title')
+            post.content = request.POST.get('content')
+            post.save()
+            return render(request=request, template_name="update_post.html")
+    else:
+        return render(request=request, template_name="update_post.html")
