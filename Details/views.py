@@ -9,16 +9,17 @@ def create_post(request):
     if not request.user.is_authenticated:
         return redirect("index")
     if request.method == 'POST':
-        if request.POST.get('title') and request.POST.get('content'):
-            post = Post()
-            post.user_id = request.user
-            post_category_id = get_category_id(request.POST.get('category'))
-            if post_category_id is not None:
-                post.post_category_id = post_category_id
-            post.title = request.POST.get('title')
-            post.content = request.POST.get('content')
-            post.save()
-            return render(request=request, template_name="create_post.html")
+        if not request.POST.get('title') and request.POST.get('content'):
+            return redirect("index")
+        post = Post()
+        post.user_id = request.user
+        post_category_id = get_category_id(request.POST.get('category'))
+        if post_category_id is not None:
+            post.post_category_id = post_category_id
+        post.title = request.POST.get('title')
+        post.content = request.POST.get('content')
+        post.save()
+        return redirect("index")
     else:
         return render(request=request, template_name="create_post.html")
 
@@ -47,15 +48,19 @@ def delete_post(request, id):
 
 
 def update_post(request, id):
+    if not request.user.is_authenticated:
+        return redirect("index")
+    if not request.user == Post.objects.get(id=id).user_id:
+        return redirect('index')
     if request.method == 'UPDATE':
+        print('here')
         post = Post.objects.get(id=id)
-        if request.user == post.user_id:
-            post_category_id = get_category_id(request.POST.get('category'))
-            if post_category_id is not None:
-                post.post_category_id = post_category_id
-            post.title = request.POST.get('title')
-            post.content = request.POST.get('content')
-            post.save()
-            return render(request=request, template_name="update_post.html")
+        post_category_id = get_category_id(request.POST.get('category'))
+        if post_category_id is not None:
+            post.post_category_id = post_category_id
+        post.title = request.POST.get('title')
+        post.content = request.POST.get('content')
+        post.save()
+        return redirect('index')
     else:
         return render(request=request, template_name="update_post.html")
