@@ -50,11 +50,10 @@ def delete_post(request, id):
 def update_post(request, id):
     if not request.user.is_authenticated:
         return redirect("index")
-    if not request.user == Post.objects.get(id=id).user_id:
+    post = Post.objects.get(id=id)
+    if not request.user == post.user_id:
         return redirect('index')
     if request.method == 'UPDATE':
-        print('here')
-        post = Post.objects.get(id=id)
         post_category_id = get_category_id(request.POST.get('category'))
         if post_category_id is not None:
             post.post_category_id = post_category_id
