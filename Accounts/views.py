@@ -4,6 +4,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages #import messages
 from .models import User
 from django.contrib.auth.forms import AuthenticationForm
+from .models import UserSocial
+from .forms import UserProfileForm
 
 # Create your views here.
 
@@ -53,3 +55,24 @@ def login_request(request):
 			messages.error(request,"Invalid username or password.")
 	form = AuthenticationForm()		
 	return render(request=request, template_name="login.html")	
+
+
+
+def edit_user(request, pk):
+    user = User.objects.get(pk=pk)
+    UserSocial = user.UserSocial
+    form = UserProfileForm(instance=UserSocial)
+
+    if request.user.is_authenticated() and request.user.id == user.id:
+        if request.method == "POST":
+            form = UserProfileForm(request.POST, request.FILES, instance=UserSocial)
+
+            if form.is_valid():
+                update = form.save(commit=False)               
+                update.user = user
+                update.save()
+            return HttpResponse('Confirm')                
+    else:
+        form = UserProfileForm(instance=UserSocial)
+
+    return render(request=request, template_name="profile.html")	
