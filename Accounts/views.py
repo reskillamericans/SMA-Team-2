@@ -57,22 +57,16 @@ def login_request(request):
 	return render(request=request, template_name="login.html")	
 
 
-
-def edit_user(request, pk):
-    user = User.objects.get(pk=pk)
-    UserSocial = user.UserSocial
-    form = UserProfileForm(instance=UserSocial)
-
-    if request.user.is_authenticated() and request.user.id == user.id:
-        if request.method == "POST":
-            form = UserProfileForm(request.POST, request.FILES, instance=UserSocial)
-
-            if form.is_valid():
-                update = form.save(commit=False)               
-                update.user = user
-                update.save()
-            return HttpResponse('Confirm')                
+	
+def edit_user(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST,instance=UserSocial)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Your Profile has been updated!')
+            return redirect('profile')
     else:
         form = UserProfileForm(instance=UserSocial)
 
-    return render(request=request, template_name="profile.html")	
+    context={'form': form}
+    return render(request=request, template_name="profile.html")
