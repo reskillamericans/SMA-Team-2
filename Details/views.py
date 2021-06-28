@@ -14,7 +14,8 @@ def create_post(request):
         return redirect("index")
     post = Post()
     post.user_id = request.user
-    post.post_category_id = get_category_id(request.POST.get('category'))
+    post_category_id = request.POST.get('category')
+    post.post_category_id = get_category_id(post_category_id)
     post.title = request.POST.get('title')
     post.content = request.POST.get('content')
     post.save()
@@ -33,7 +34,7 @@ def get_category_id(category):
         # Else Create category
         new_category = PostCategory(name=category)
         new_category.save()
-        return new_category
+        return new_category.id
 
 
 def delete_post(request, id):

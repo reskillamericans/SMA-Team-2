@@ -6,7 +6,7 @@
 <!--Create_post-->
 <div class="container py-5">
     <h1>Update a Post</h1>
-    <form action="{% url 'update_post' user.id %}" method="POST">
+    <form action="{% url 'update_post' callback_kwargs %}" method="POST">
         {% csrf_token %}
         Title: <input type="text" name="title" required/><br/>
         Category: <input type="text" name="category"/><br/>
