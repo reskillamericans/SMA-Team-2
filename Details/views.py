@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-
+from django.http import HttpResponse
+from .models import Post, PostCategory
 
 # Create your views here.
-
-from .models import Post, PostCategory
 
 
 def create_post(request):
@@ -73,3 +72,46 @@ def update_post(request, id):
     context = {'postobj': post}
 
     return render(request, 'update_post.html', context)
+
+
+# Like/Unlike Post Feature
+def like_post(request, post_id):
+
+    if not request.user.is_authenticated:
+        return redirect("index")
+
+    post = Post.objects.get(id=post_id)
+
+    is_liked_by_user = False
+
+    # Check if logged in user has liked this post.
+    for user_like in post.likes.all():
+        if user_like == request.user:
+            is_liked_by_user = True
+            break
+
+    if not is_liked_by_user:
+        post.likes.add(request.user)
+
+    return HttpResponse()
+
+
+def unlike_post(request, post_id):
+
+    if not request.user.is_authenticated:
+        return redirect("index")
+
+    post = Post.objects.get(id=post_id)
+
+    is_liked_by_user = False
+
+    # Check if logged in user has liked this post.
+    for user_like in post.likes.all():
+        if user_like == request.user:
+            is_liked_by_user = True
+            break
+
+    if is_liked_by_user:
+        post.likes.remove(request.user)
+
+    return HttpResponse()

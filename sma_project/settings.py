@@ -135,5 +135,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# For use during development. Need to replace with real e-mail server for production.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
