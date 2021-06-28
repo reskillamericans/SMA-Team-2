@@ -6,5 +6,5 @@ from .models import UserSocial
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserSocial
-        fields=['facebook','instagram','twitter','linkedin','github']
+        fields=['facebook_link','instagram_link','twitter_link','linkedin_link','github_link']
         
