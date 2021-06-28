@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
+from Details.models import Post, PostComment
 
 # Create your views here.
 
@@ -131,3 +132,26 @@ def password_reset_confirm_request(request, uidb64, token):
 	
 def password_reset_complete_request(request):
 	return render(request=request, template_name="password_reset_complete.html")
+
+def post_comment_request(request, pk):
+	try:
+		post = Post.objects.get(id=pk)
+	except Post.DoesNotExist:
+		messages.error("Post does not exist")
+		return redirect("index")
+		
+	if request.method == "POST":
+		comment = request.POST['comment']
+		print("The session is ", request.session)
+		print("The user request ", request.user)
+		session_user = request.user
+		user = User.objects.get(email=session_user)
+		post_comment = PostComment(commenter_id=user, post_id=post, content=comment)
+		post_comment.save()
+		messages.success(request, "Comment successfully posted")
+		return redirect("index")
+
+	return render(request, "comment.html", {'post':post})
+
+		
+	

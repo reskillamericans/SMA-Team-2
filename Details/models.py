@@ -34,8 +34,8 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL)
-    content = models.TextField
-    likes = models.IntegerField
+    content = models.TextField()
+    likes = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -44,7 +44,7 @@ class PostComment(models.Model):
     id = models.AutoField(primary_key=True)
     commenter_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content = models.TextField
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
