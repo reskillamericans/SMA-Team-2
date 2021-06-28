@@ -5,11 +5,16 @@ from django.contrib import messages #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm
+
+from .models import UserSocial
+from .forms import UserProfileForm
+
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
+
 
 # Create your views here.
 
@@ -59,6 +64,26 @@ def login_request(request):
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
+
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()		
+	return render(request=request, template_name="login.html")	
+
+
+	
+def edit_user(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST,instance=UserSocial)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Your Profile has been updated!')
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=UserSocial)
+
+    context={'form': form}
+    return render(request=request, template_name="profile.html")
+
 			messages.error(request,"Invalid username or password.")	
 	return render(request=request, template_name="login.html")	
 
@@ -158,4 +183,5 @@ def follow_user(request, user_name):
     else:
         return redirect(f'/profile/{session_user}')
    
+
 
