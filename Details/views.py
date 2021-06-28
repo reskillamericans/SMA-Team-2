@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -9,9 +11,10 @@ def create_post(request):
     if not request.user.is_authenticated:
         return redirect("index")
     if request.method != 'POST':
-        return render(request=request, template_name="create_post.html")
+        return render(request, "create_post.html")
     if not request.POST.get('title') and request.POST.get('content'):
-        return redirect("index")
+        context = {'error': 'The post was not successfully created. Please enter a title and content'}
+        return render(request, 'create_post.html', context)
     post = Post()
     post.user_id = request.user
     post_category_id = request.POST.get('category')
@@ -19,7 +22,8 @@ def create_post(request):
     post.title = request.POST.get('title')
     post.content = request.POST.get('content')
     post.save()
-    return redirect("index")
+    messages.success(request, "Your post has been successfully created")
+    return render(request, 'create_post.html')
 
 
 
@@ -34,7 +38,7 @@ def get_category_id(category):
         # Else Create category
         new_category = PostCategory(name=category)
         new_category.save()
-        return new_category.id
+        return new_category
 
 
 def delete_post(request, id):
@@ -51,16 +55,21 @@ def update_post(request, id):
         return redirect("index")
 
     try:
-        post = Post.objects.get(id=id)
+        post = get_object_or_404(Post, id=id)
     except Post.DoesNotExist:
         return redirect('index')
 
     if not request.user == post.user_id:
         return redirect('index')
     if request.method != 'POST':
-        return render(request=request, template_name="update_post.html")
+        context = {'postobj': post,
+                   'error': 'The post was not successfully updated. The title and content must be filled out.'}
+        return render(request, "update_post.html", context)
     post.post_category_id = get_category_id(request.POST.get('category'))
     post.title = request.POST.get('title')
     post.content = request.POST.get('content')
     post.save()
-    return redirect('index')
+    messages.success(request, "The post was successfully updated")
+    context = {'postobj': post}
+
+    return render(request, 'update_post.html', context)

@@ -4,13 +4,28 @@
   
 
 <!--Create_post-->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if error %}
+{{ error }}
+{% endif %}
+
 <div class="container py-5">
     <h1>Update a Post</h1>
-    <form action="{% url 'update_post' callback_kwargs %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
-        Title: <input type="text" name="title" required/><br/>
-        Category: <input type="text" name="category"/><br/>
-        Content: <br/><textarea cols="35" rows="8" name="content" required></textarea><br/>
+        Title: <input type="text" name="title" value="{{postobj.title}}" required/><br/>
+        Category: <input type="text" name="category"
+                         {% if postobj.post_category_id != None %}
+                         value="{{postobj.post_category_id}}"
+                         {% endif %}/><br/>
+        Content: <br/><textarea cols="35" rows="8" name="content" required>{{postobj.content}}</textarea><br/>
         <input type="submit" value="Update"/>
     </form>
 </div>
