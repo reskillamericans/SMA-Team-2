@@ -17,10 +17,13 @@ class Message(models.Model):
 
 class Follower(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="following")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="following")
     follower_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="follower")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.user.username 
 
 
 class PostCategory(models.Model):
