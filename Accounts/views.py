@@ -3,6 +3,7 @@ from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages #import messages
 from .models import User, PasswordReset
+from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
@@ -129,8 +130,8 @@ def password_reset_confirm_request(request, uidb64, token):
 
 	return render(request=request, template_name="password_reset_confirm.html")
 	
+	
 def password_reset_complete_request(request):
-
 	return render(request=request, template_name="password_reset_complete.html")
 
 
@@ -157,5 +158,4 @@ def follow_user(request, user_name):
     else:
         return redirect(f'/profile/{session_user}')
    
-	return render(request=request, template_name="password_reset_complete.html")
 
