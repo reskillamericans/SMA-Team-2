@@ -5,15 +5,6 @@ from django.conf import settings
 # Create your models here.
 
 
-class PasswordReset(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    token = models.CharField(max_length=50, unique=True)
-    token_used = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField
-
-
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
     receiver_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="message_receiver")
@@ -26,10 +17,13 @@ class Message(models.Model):
 
 class Follower(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="following")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="following")
     follower_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="follower")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.user.username 
 
 
 class PostCategory(models.Model):
@@ -43,8 +37,8 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL)
-    content = models.TextField
-    likes = models.IntegerField
+    content = models.TextField()
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="likes")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -53,7 +47,7 @@ class PostComment(models.Model):
     id = models.AutoField(primary_key=True)
     commenter_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content = models.TextField
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
