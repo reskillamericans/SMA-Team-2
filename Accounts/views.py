@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
-from Details.models import Follower
+
 # Create your views here.
 
 def index(request):
@@ -130,6 +130,7 @@ def password_reset_confirm_request(request, uidb64, token):
 	return render(request=request, template_name="password_reset_confirm.html")
 	
 def password_reset_complete_request(request):
+
 	return render(request=request, template_name="password_reset_complete.html")
 
 
@@ -139,7 +140,7 @@ def follow_user(request, user_name):
 	#get id 
     session_user = request.session['user']
     get_user = User.objects.get(username=session_user)
-    check_follower = Follower.objects.get(user=get_user.id)
+    check_follower = Follower.objects.get(username=get_user.id)
     is_followed = False
     if other_user.username != session_user:
         if check_follower.follower_id.filter(username=other_user).exists():
@@ -156,3 +157,5 @@ def follow_user(request, user_name):
     else:
         return redirect(f'/profile/{session_user}')
    
+	return render(request=request, template_name="password_reset_complete.html")
+
