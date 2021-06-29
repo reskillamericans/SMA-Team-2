@@ -3,13 +3,19 @@ from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages #import messages
 from .models import User, PasswordReset
+from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm
+
+from .models import UserSocial
+from .forms import UserProfileForm
+
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
 from Details.models import Post, PostComment
+
 
 # Create your views here.
 
@@ -59,8 +65,28 @@ def login_request(request):
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
-			messages.error(request,"Invalid username or password.")	
+
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()		
 	return render(request=request, template_name="login.html")	
+
+
+	
+def edit_user(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST,instance=UserSocial)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Your Profile has been updated!')
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=UserSocial)
+
+    context={'form': form}
+    return render(request=request, template_name="profile.html")
+
+	#messages.error(request,"Invalid username or password.")	
+	#return render(request=request, template_name="login.html")	
 
 
 
@@ -130,6 +156,7 @@ def password_reset_confirm_request(request, uidb64, token):
 
 	return render(request=request, template_name="password_reset_confirm.html")
 	
+	
 def password_reset_complete_request(request):
 	return render(request=request, template_name="password_reset_complete.html")
 
@@ -155,3 +182,29 @@ def post_comment_request(request, pk):
 
 		
 	
+
+
+def follow_user(request, user_name):
+    other_user = User.objects.get(username=user_name)
+	#get id 
+    session_user = request.session['user']
+    get_user = User.objects.get(username=session_user)
+    check_follower = Follower.objects.get(username=get_user.id)
+    is_followed = False
+    if other_user.username != session_user:
+        if check_follower.follower_id.filter(username=other_user).exists():
+            add_usr = Follower.objects.get(username=get_user)
+            add_usr.follower_id.remove(other_user)
+            is_followed = False
+            return redirect(f'/profile/{session_user}')
+        else:
+            add_usr = Follower.objects.get(username=get_user)
+            add_usr.follower_id.add(other_user)
+            is_followed = True
+            return redirect(f'/profile/{session_user}')
+ 
+    else:
+        return redirect(f'/profile/{session_user}')
+   
+
+
