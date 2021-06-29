@@ -73,20 +73,19 @@ def login_request(request):
 
 	
 def edit_user(request):
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST,instance=UserSocial)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'Your Profile has been updated!')
-            return redirect('profile')
-    else:
-        form = UserProfileForm(instance=UserSocial)
+	if request.method == 'POST':
+		form = UserProfileForm(request.POST,instance=UserSocial)
+		if form.is_valid():
+			form.save()
+			messages.success(request,'Your Profile has been updated!')
+			return redirect('profile')
+	else:
+		form = UserProfileForm(instance=UserSocial)
+		context = {'form': form}
+		return render(request=request, template_name="profile.html", context=context)
 
-    context={'form': form}
-    return render(request=request, template_name="profile.html")
-
-	#messages.error(request,"Invalid username or password.")	
-	#return render(request=request, template_name="login.html")	
+	messages.error(request,"Invalid username or password.")	
+	return render(request=request, template_name="login.html")	
 
 
 
