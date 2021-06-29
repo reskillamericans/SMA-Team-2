@@ -48,18 +48,11 @@ class PostCategory(models.Model):
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
-<<<<<<< HEAD
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL)
-    content = models.TextField()
-    likes = models.IntegerField()
-=======
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET(None))
     title = models.CharField(max_length=50, null=True)
     post_category_id = models.ForeignKey(PostCategory, null=True, on_delete=models.SET_NULL, blank=True)
     content = models.TextField(null=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="likes")
->>>>>>> upstream/dev
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -73,12 +66,8 @@ class Post(models.Model):
 class PostComment(models.Model):
     id = models.AutoField(primary_key=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    content = models.TextField()
-=======
     commenter_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField(null=True)
->>>>>>> upstream/dev
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
