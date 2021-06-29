@@ -168,8 +168,6 @@ def post_comment_request(request, pk):
 		
 	if request.method == "POST":
 		comment = request.POST['comment']
-		print("The session is ", request.session)
-		print("The user request ", request.user)
 		session_user = request.user
 		user = User.objects.get(email=session_user)
 		post_comment = PostComment(commenter_id=user, post_id=post, content=comment)
