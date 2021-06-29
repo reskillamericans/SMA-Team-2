@@ -1,0 +1,20 @@
+{% extends "header.html" %}
+
+{% block content %} 
+  
+
+<!--Login--> 
+<div class="container py-5">
+	<h1>Profile</h1>
+	<form action="{% url 'profile' %}" method="POST">
+		{% csrf_token %}
+		Facebook: <input type="text" name="Facebook link" ><br/>
+		Instagram: <input type="text" name="Instagram link" ><br/> 
+        Twitter: <input type="text" name="Twitter link" ><br/> 
+        Linkedin: <input type="text" name="Linkedin link" ><br/> 
+        Github: <input type="text" name="Github link" ><br/> 
+		<input type="submit" value="Update"/>
+	</form>
+</div>
+
+{% endblock %}
