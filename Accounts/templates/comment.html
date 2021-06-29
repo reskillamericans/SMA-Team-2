@@ -1,0 +1,21 @@
+{% extends "header.html" %}
+
+{% block content %} 
+  
+
+<!--Comment--> 
+<div class="container py-5">
+	<h1>Comments</h1>
+	<!-- pass the post.id to the view-->
+	<form action="{% url 'comment' post.id %}" method="POST">
+		{% csrf_token %}
+		<h3>Post</h3>
+        <textarea>{{ post.content }}</textarea>
+        <br>
+        <br>
+        <textarea name="comment"></textarea>
+		<input type="submit" value="Comment"/>
+	</form>
+</div>
+
+{% endblock %}
