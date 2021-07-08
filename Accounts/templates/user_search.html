@@ -1,0 +1,17 @@
+{% extends "header.html" %}
+
+{% block content %} 
+  
+
+<!--Password Reset--> 
+<div class="container py-5">
+	<h1>User Search</h1>
+	<p>Looking for a user? Enter the username in the search bar below.</p>
+	<form method="POST">
+		{% csrf_token %}
+		username: <input type="text" name="username" required/>
+		<input type="submit" value="Submit"/>
+	</form>
+</div>
+
+{% endblock %}

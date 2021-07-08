@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 from .models import UserSocial
 from .forms import UserProfileForm
@@ -205,3 +205,23 @@ def follow_user(request, user_name):
    
 
 
+
+def user_search(request):
+	
+	#if request.method == "POST":
+		#find_username = request.POST['find_username']
+		#user = User.objects.filter(username=find_username)
+
+
+
+	if request.method == "POST":
+		query = request.POST['query']
+
+		if query:
+			users = Users.objects.filter(username__contains=query)
+			return render(request,"user_search_result.html", {"users":users})
+		else:
+			print("No users found")
+			return request(request,"user_search_result.html",{})
+
+	return render(request=request, template_name="user_search.html")

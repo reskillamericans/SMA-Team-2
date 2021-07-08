@@ -115,3 +115,19 @@ def unlike_post(request, post_id):
         post.likes.remove(request.user)
 
     return HttpResponse()
+
+
+
+def post_search(request):
+
+    if request.method == "POST":
+        query = request.POST['query']
+
+        if query:
+            posts = Post.objects.filter(content__contains = query)
+            return render(request,"post_search_result.html", {"posts":posts})
+        else:
+            print("No posts found")
+            return request(request,"post_search_result.html",{})
+
+    return render(request=request, template_name="post_search.html")
