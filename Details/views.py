@@ -118,16 +118,28 @@ def unlike_post(request, post_id):
 
 
 
-def post_search(request):
+
+
+
+
+def search_post(request):
 
     if request.method == "POST":
         query = request.POST['query']
 
         if query:
-            posts = Post.objects.filter(content__contains = query)
-            return render(request,"post_search_result.html", {"posts":posts})
-        else:
-            print("No posts found")
-            return request(request,"post_search_result.html",{})
+            posts = Post.objects.filter(content__contains=query)
+            if posts:
+                for post in posts:
+                    messages.info(request, post.content)
 
-    return render(request=request, template_name="post_search.html")
+            else:
+                messages.error(request, "No results.")
+
+            return render(request=request, template_name="search_post.html")
+
+        else:
+            print("Please type keyword")
+            return render(request=request, template_name="search_post.html")
+
+    return render(request=request, template_name="search_post.html")

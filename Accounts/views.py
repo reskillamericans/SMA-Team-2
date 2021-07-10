@@ -1,3 +1,4 @@
+from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
@@ -206,22 +207,24 @@ def follow_user(request, user_name):
 
 
 
-def user_search(request):
+def search_user(request):
 	
-	#if request.method == "POST":
-		#find_username = request.POST['find_username']
-		#user = User.objects.filter(username=find_username)
-
-
-
 	if request.method == "POST":
 		query = request.POST['query']
 
 		if query:
-			users = Users.objects.filter(username__contains=query)
-			return render(request,"user_search_result.html", {"users":users})
-		else:
-			print("No users found")
-			return request(request,"user_search_result.html",{})
+			users = User.objects.filter(username__contains=query)
 
-	return render(request=request, template_name="user_search.html")
+			if users:
+				for user in users:
+					messages.info(request, user.username)
+			else:
+				messages.error(request, "Username not found")
+				
+			return render(request=request, template_name="search_user.html")
+
+		else:
+			print("Please type username")
+			return render(request=request, template_name="search_user.html")
+
+	return render(request=request, template_name="search_user.html")

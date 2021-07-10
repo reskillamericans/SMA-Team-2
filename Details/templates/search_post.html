@@ -9,7 +9,7 @@
 	<p>Looking for a particular post? Enter keywords in the search bar below.</p>
 	<form method="POST">
 		{% csrf_token %}
-		keywords: <input type="text" name="keywords" required/>
+		keywords: <input type="text" name="query" required/>
 		<input type="submit" value="Submit"/>
 	</form>
 </div>
