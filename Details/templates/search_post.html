@@ -3,14 +3,14 @@
 {% block content %} 
   
 
-<!--Password Reset--> 
+
 <div class="container py-5">
 	<h1>Post Search</h1>
 	<p>Looking for a particular post? Enter keywords in the search bar below.</p>
 	<form method="POST">
 		{% csrf_token %}
 		keywords: <input type="text" name="query" required/>
-		<input type="submit" value="Submit"/>
+		<input type="submit" value="Search"/>
 	</form>
 </div>
 
