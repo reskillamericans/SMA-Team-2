@@ -123,7 +123,7 @@ def send_message(request, id):
         return redirect("index")
 
     try:
-        receiver = User.objects.get(id=id)
+        receiver = get_object_or_404(User, id=id)
     except User.DoesNotExist:
         messages.error("User does not exist")
         return redirect("index")
@@ -137,7 +137,7 @@ def send_message(request, id):
     message = Message()
     message.sender_id = request.user
     message.receiver_id = receiver
-    message.content = request.POST.get('content')
+    message.content = request.POST.get('messageobj')
     message.save()
     messages.success(request, "Your message was successfully sent")
     return render(request, 'send_message.html')
