@@ -1,7 +1,7 @@
 from django.urls import path 
 from. import views
 
-# api_name = "details"
+api_name = "details"
 app_name = "details"
 urlpatterns = [
     path("create_post/", views.create_post, name="create_post"),
