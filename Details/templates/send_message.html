@@ -1,0 +1,29 @@
+{% include "header.html" %}
+
+{% block content %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if error %}
+{{ error }}
+{% endif %}
+
+<!--Send_message-->
+<div class="container py-5">
+    <h1>Create a Post</h1>
+    <form action="{% url 'send_message' id %}" method="POST">
+        {% csrf_token %}
+        Content: <br/><textarea cols="35" rows="8" name="content" required></textarea><br/>
+        <input type="submit" value="Post"/>
+    </form>
+</div>
+
+
+{% endblock %}

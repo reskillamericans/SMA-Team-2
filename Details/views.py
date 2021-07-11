@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Post, PostCategory
+from Accounts.models import User
+from .models import Post, PostCategory, Message
 
 # Create your views here.
 
@@ -115,3 +116,29 @@ def unlike_post(request, post_id):
         post.likes.remove(request.user)
 
     return HttpResponse()
+
+
+def send_message(request, id):
+    if not request.user.is_authenticated:
+        return redirect("index")
+
+    try:
+        receiver = User.objects.get(id=id)
+    except User.DoesNotExist:
+        messages.error("User does not exist")
+        return redirect("index")
+
+    if request.method != 'POST':
+        return render(request, "send_message.html")
+
+    if not request.POST.get('content'):
+        context = {'error': 'The message was not successfully sent. Please enter content'}
+        return render(request, 'create_post.html', context)
+    message = Message()
+    message.sender_id = request.user
+    message.receiver_id = receiver
+    message.content = request.POST.get('content')
+    message.save()
+    messages.success(request, "Your message was successfully sent")
+    return render(request, 'send_message.html')
+
