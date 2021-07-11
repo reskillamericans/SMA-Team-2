@@ -133,7 +133,7 @@ def send_message(request, id):
 
     if not request.POST.get('content'):
         context = {'error': 'The message was not successfully sent. Please enter content'}
-        return render(request, 'create_post.html', context)
+        return render(request, 'send_message.html', context)
     message = Message()
     message.sender_id = request.user
     message.receiver_id = receiver

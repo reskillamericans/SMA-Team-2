@@ -1,5 +1,4 @@
 from django.urls import path 
-from Accounts import views as accountViews
 from. import views
 
 urlpatterns = [
@@ -8,5 +7,8 @@ urlpatterns = [
     path("delete_post/<int:id>/", views.delete_post, name="delete_post"),
     path('like_post/<post_id>/', views.like_post, name='like_post'),
     path('unlike_post/<post_id>/', views.unlike_post, name='unlike_post'),
-    path('send_message/<int:id>/', views.send_message, name='send_message'),
+    path('send_message/<int:id>/', views.send_message, name='send_message', api_name="details"),
 ]
+
+
+

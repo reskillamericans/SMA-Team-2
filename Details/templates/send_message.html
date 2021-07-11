@@ -18,7 +18,7 @@
 <!--Send_message-->
 <div class="container py-5">
     <h1>Create a Post</h1>
-    <form action="{% url 'send_message' id %}" method="POST">
+    <form action="{% url 'details:send_message' id %}" method="POST">
         {% csrf_token %}
         Content: <br/><textarea cols="35" rows="8" name="content" required></textarea><br/>
         <input type="submit" value="Post"/>
