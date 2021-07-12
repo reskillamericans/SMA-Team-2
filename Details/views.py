@@ -8,7 +8,8 @@ from .models import Post, PostCategory
 
 def create_post(request):
     if not request.user.is_authenticated:
-        return redirect("index")
+        messages.info(request, "Please login")
+        return redirect("login")
     if request.method != 'POST':
         return render(request, "create_post.html")
     if not request.POST.get('title') and request.POST.get('content'):
@@ -115,3 +116,31 @@ def unlike_post(request, post_id):
         post.likes.remove(request.user)
 
     return HttpResponse()
+
+
+
+
+
+
+
+def search_post(request):
+
+    if request.method == "POST":
+        query = request.POST['query']
+
+        if query:
+            posts = Post.objects.filter(content__contains=query)
+            if posts:
+                for post in posts:
+                    messages.info(request, post.content)
+
+            else:
+                messages.error(request, "No results.")
+
+            return render(request=request, template_name="search_post.html")
+
+        else:
+            print("Please type keyword")
+            return render(request=request, template_name="search_post.html")
+
+    return render(request=request, template_name="search_post.html")

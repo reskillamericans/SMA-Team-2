@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
+import django_on_heroku
+
 
 # Extending User Model Using a Custom Model Extending AbstractUser
 # We have to update our settings.py defining the AUTH_USER_MODEL property.
@@ -139,4 +140,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
