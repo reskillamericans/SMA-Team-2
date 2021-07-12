@@ -26,12 +26,12 @@ def index(request):
 
 def register_request(request):
 	if request.method == 'POST':
-		username = request.POST['username']
-		password = request.POST['password']
-		confirmpwd = request.POST['conf_password']
-		first_name = request.POST['first_name']
-		last_name = request.POST['last_name']
-		email = request.POST['email']
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		confirmpwd = request.POST.get('conf_password')
+		first_name = request.POST.get('first_name')
+		last_name = request.POST.get('last_name')
+		email = request.POST.get('email')
 		
 		if password == confirmpwd:
 			try:
@@ -50,26 +50,23 @@ def register_request(request):
 
 
 def login_request(request):
+	
 	if request.user.is_authenticated:
 		return redirect("index")
 
 	if request.method == "POST":
-		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
-			if user is not None:
-				login(request, user)
-				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("index")
-			else:
-				messages.error(request,"Invalid username or password.")
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			login(request, user)
+			messages.info(request, f"You are now logged in as {username}.")
+			return redirect("index")
 		else:
-
 			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()		
-	return render(request=request, template_name="login.html")	
+			return redirect("login")	
+	
+	return render(request, "login.html")	
 
 
 	
@@ -92,6 +89,7 @@ def edit_user(request):
 
 
 def password_reset_request(request):
+	
 	if request.method == "POST":
 		email = request.POST['email']
 		user = User.objects.filter(email=email).first()
@@ -160,7 +158,9 @@ def password_reset_confirm_request(request, uidb64, token):
 def password_reset_complete_request(request):
 	return render(request=request, template_name="password_reset_complete.html")
 
+
 def post_comment_request(request, pk):
+	
 	try:
 		post = Post.objects.get(id=pk)
 	except Post.DoesNotExist:
@@ -179,8 +179,6 @@ def post_comment_request(request, pk):
 	return render(request, "comment.html", {'post':post})
 
 		
-	
-
 
 def follow_user(request, user_name):
     other_user = User.objects.get(username=user_name)
