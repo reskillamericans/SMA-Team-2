@@ -218,6 +218,7 @@ def search_user(request):
 			if users:
 				for user in users:
 					messages.info(request, user.username)
+					
 			else:
 				messages.error(request, "Username not found")
 				
