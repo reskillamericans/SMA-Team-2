@@ -8,7 +8,8 @@ from .models import Post, PostCategory
 
 def create_post(request):
     if not request.user.is_authenticated:
-        return redirect("index")
+        messages.info(request, "Please login")
+        return redirect("login")
     if request.method != 'POST':
         return render(request, "create_post.html")
     if not request.POST.get('title') and request.POST.get('content'):

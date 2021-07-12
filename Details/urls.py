@@ -2,6 +2,8 @@ from django.urls import path
 from Accounts import views as accountViews
 from. import views
 
+# app_name = "details"
+
 urlpatterns = [
     path("create_post/", views.create_post, name="create_post"),
     path("update_post/<int:id>/", views.update_post, name="update_post"),
