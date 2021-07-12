@@ -1,8 +1,8 @@
-from django.urls import path 
+from django.urls import path
 from. import views
 
-api_name = "details"
-app_name = "details"
+# api_name = "details"
+app_name = "Details"
 urlpatterns = [
     path("create_post/", views.create_post, name="create_post"),
     path("update_post/<int:id>/", views.update_post, name="update_post"),
