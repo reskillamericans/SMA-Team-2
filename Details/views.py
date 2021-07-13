@@ -118,27 +118,34 @@ def unlike_post(request, post_id):
     return HttpResponse()
 
 
-def send_message(request, id):
+def send_message(request):
     if not request.user.is_authenticated:
         return redirect("index")
 
-    try:
-        receiver = get_object_or_404(User, id=id)
-    except User.DoesNotExist:
-        messages.error("User does not exist")
-        return redirect("index")
+    users = User.objects.all()
+    messageobjs = Message.objects.filter(receiver_id=request.user)
+    context = {'users': users, 'messageobjs':messageobjs}
 
-    if request.method != 'POST':
-        return render(request, "send_message.html")
+    return render(request, 'send_message.html', context)
 
-    if not request.POST.get('messageobj'):
-        context = {'error': 'The message was not successfully sent. Please enter content'}
-        return render(request, 'send_message.html', context)
-    message = Message()
-    message.sender_id = request.user
-    message.receiver_id = receiver
-    message.content = request.POST.get('messageobj')
-    message.save()
-    messages.success(request, "Your message was successfully sent")
-    return render(request, 'send_message.html')
+
+def send_user_message(request, id):
+    if request.method == 'POST':
+        try:
+            receiver = get_object_or_404(User, id=id)
+        except User.DoesNotExist:
+            messages.error("User does not exist")
+            return redirect("index")
+
+        if not request.POST.get('messageobj'):
+            context = {'error': 'The message was not successfully sent. Please enter content'}
+            return render(request, 'send_message.html', context)
+        message = Message()
+        message.sender_id = request.user
+        message.receiver_id = receiver
+        message.content = request.POST.get('messageobj')
+        message.save()
+        messages.success(request, "Your message was successfully sent")
+    return redirect('Details:send_message')
+
 
