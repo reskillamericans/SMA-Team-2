@@ -8,7 +8,7 @@ from django.conf import settings
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
     sender_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="message_sender", on_delete=models.DO_NOTHING, null=True)
-    receiver_id = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="message_receiver")
+    receiver_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="message_receiver", on_delete=models.DO_NOTHING, null=True)
     content = models.TextField(null=True)
     read_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
