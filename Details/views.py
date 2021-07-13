@@ -9,7 +9,8 @@ from .models import Post, PostCategory, Message
 
 def create_post(request):
     if not request.user.is_authenticated:
-        return redirect("index")
+        messages.info(request, "Please login")
+        return redirect("login")
     if request.method != 'POST':
         return render(request, "create_post.html")
     if not request.POST.get('title') and request.POST.get('content'):
@@ -149,3 +150,24 @@ def send_user_message(request, id):
     return redirect('Details:send_message')
 
 
+def search_post(request):
+
+    if request.method == "POST":
+        query = request.POST['query']
+
+        if query:
+            posts = Post.objects.filter(content__contains=query)
+            if posts:
+                for post in posts:
+                    messages.info(request, post.content)
+
+            else:
+                messages.error(request, "No results.")
+
+            return render(request=request, template_name="search_post.html")
+
+        else:
+            print("Please type keyword")
+            return render(request=request, template_name="search_post.html")
+
+    return render(request=request, template_name="search_post.html")
