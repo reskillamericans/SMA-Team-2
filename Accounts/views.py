@@ -17,6 +17,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
 from Details.models import Post, PostComment
 
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
@@ -176,7 +178,27 @@ def post_comment_request(request, pk):
 		messages.success(request, "Comment successfully posted")
 		return redirect("index")
 
-	return render(request, "comment.html", {'post':post})
+	return render(request, "comment.html", {'post':post}) 
+
+
+
+def delete_comment(request):
+    id = request.POST['comment_id']
+    pk = request.POST['posts_id']
+
+    if request.method == 'POST':
+       comment = get_object_or_404('Comment', id=id, pk=pk)
+    try:
+        comment.delete()
+        messages.success(request, 'You have successfully deleted the comment')
+
+    except:
+        messages.warning(request, 'The comment could not be deleted.')
+
+    return redirect(request, "comment.html", {'post':Post}) 
+
+
+
 
 		
 
