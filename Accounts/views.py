@@ -188,6 +188,7 @@ def delete_comment(request):
 
     if request.method == 'POST':
        comment = get_object_or_404('Comment', id=id, pk=pk)
+	   
     try:
         comment.delete()
         messages.success(request, 'You have successfully deleted the comment')
