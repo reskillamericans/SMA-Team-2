@@ -2,7 +2,7 @@ from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib import messages #import messages
+from django.contrib import messages,  #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
@@ -182,26 +182,27 @@ def post_comment_request(request, pk):
 
 
 
-def delete_comment(request):
+def delete_comment(request, id):
     id = request.POST['comment_id']
-    pk = request.POST['posts_id']
+    pk = request.POST['blogs_id']
 
     if request.method == 'POST':
-       comment = get_object_or_404('Comment', id=id, pk=pk)
-	   
+	    session_user = request.user
+	    user = User.objects.get(email=session_user)
+    comment = get_object_or_404('Comment', id=id, pk=pk)
     try:
         comment.delete()
         messages.success(request, 'You have successfully deleted the comment')
 
     except:
         messages.warning(request, 'The comment could not be deleted.')
-
-    return redirect(request, "comment.html", {'post':Post}) 
-
+        return redirect(request, "comment.html", {'post':Post}) 	
 
 
 
-		
+
+
+
 
 def follow_user(request, user_name):
     other_user = User.objects.get(username=user_name)
