@@ -191,7 +191,7 @@ def delete_comment(request, id):
 
     except:
         messages.warning(request, 'The comment could not be deleted.')
-        return redirect(request, "comment.html", {'post':Post}) 	
+        return redirect("index")
 
 
 
