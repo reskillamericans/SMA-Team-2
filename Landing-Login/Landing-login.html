@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author"  content="Pia Torain">
+    <meta name="description"  content="The Forgot Password page of SMA-T1 pro">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Red+Rose:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="SMA2-header-and-bg.css">
+    <link rel="stylesheet" href="landing-login.css">
+    <link rel="stylesheet" href="landing-reg.css">
+    <link rel="stylesheet" href="landing-reg-acct.css">
+
+
+    
+    <title>Landing-Page-Login</title>
+</head>
+<body>
+    <!-- HEADER -->
+    
+    <div class="header-layout">
+        <div class="header-left" id="left">
+            <img class="logo" src="assets/SMA-h-logo.svg"  width=170 height=72 alt="SMA-logo" />
+            <!-- <img class="mobile-logo" src="assets/m-SMA-logo.png"  width=170 height=72 alt="SMA-logo" /> -->
+            <img class="logo-number" src="assets/2-logo.png"  width=24.5 height=35 alt="number two" />
+            <div class="title">
+                <span>Social Media App 2</span>
+            </div>
+        </div>
+        
+        <div class="header-right" id="right">
+            <a class="links" href="#" alt="link to landing page">Home</a>
+            <a class="links" href="#" alt="link to login page">Log in</a>
+            <a class="links" href="registration.html" alt="link to registration page">Sign Up</a>
+            <a class="links" href="#">About Us</a>
+        </div>
+    </div>
+ 
+    <!-- /HEADER -->
+    
+    <!-- BACKGROUND IMAGE -->
+    <div id="bg">
+        <img id="img-bg" class="app-bg" src="assets/bg.png" alt="">
+    </div>
+    <!-- /BACKGROUND IMAGE -->
+
+    <!-- Landing Page - Login -->
+    <section class="landing-login" id="landing">
+        
+        <div class="landing-form-layout">
+            <div class="landing-left">
+                <div class="landing-details">
+                    <div class="landing-details-header">
+                        <img class="body-logo" src="assets/SMA-logo-m1.svg"  width=166.53 height=96 alt="SMA-logo" />
+                        <span class="number">2</span>
+                        <!-- <img class="body-logo-number" src="assets/2-logo.png"  width=24.5 height=35 alt="number two" /> -->
+                    </div>
+                    <div class="landing-details-text">
+                        <p class="connect">connect with a</p>
+                        <p class="community">Community</p>
+                        <p class="minded">Of like-minded individuals that are passionate about Technology.</p>
+                    </div>
+                </div>
+            </div>
+
+            
+                <form action="/login" method="POST" id="login_form" class="landing-form-right login-sheet">
+                
+                    <!-- Email -->
+                    <div class="landing-form-container">
+                        <label for="log_email">Email</label>
+                        <input class="login-email" name="log_email" type="email" id="log_email" autocomplete="on" required/>
+                    </div>
+                    <!-- /Email-->
+
+                    <!-- Password-->
+                    <div class="landing-form-container">
+                        <label for="log_password">Password</label>
+                        <input class="login-pwd" name="log_password" type="password" id="old_password" autocomplete="on" required/>
+                    </div>
+                    <!-- /Password-->
+
+                    <!-- Mobile layout for Forget link -->
+                    <div class="m-forget">
+                        <a class="mobile" href="#" alt="link to forgot password page">Forgot Password?</a>
+                    </div>
+                    <!-- /Mobile layout for Forget link -->
+
+                    <!-- Login Button-->
+                    <div class="landing-form-container">
+                        <input type='submit' id="btn-login" class="loginbtn" value="Log In" />
+                    </div>
+                    
+                    <!-- Desktop Forgot -->
+                    <div class="fp">
+                        <a href="#" alt="link to forgot password page">Forgot Password?</a>
+                    </div>
+                    <!-- Desktop Forgot -->
+                    
+                    <!-- Create Account Button-->
+                    <div class="create-acc">
+                        <button type='submit' id="btn-create" class="create" >Create New Account</button>
+                    </div>
+                    <!-- /Create Account Button-->
+                </form>
+        </div>  
+    </section>
+    <!-- /Landing Page - Login -->
+
+    <!-- Register Window -->
+    <section class="register-window" id="register">
+        
+
+        <div class="form-layout">
+            <div class="content">
+                <!-- X TO CLOSE WINDOW -->
+                <div class="reg-intro">
+                    <p class="reg-text">Sign Up</p> 
+                    <p class="closeout">
+                        <button id="registrationClose" class="button-close" type="button">
+                            <!-- <a href="/Landing-Login/Landing-login.html" alt="link to landing page"> -->
+                                <img src="assets/X.svg">
+                            <!-- </a> -->
+                        </button>
+                    </p>
+                    
+                </div> 
+                <p class="reg-info">It's quick and easy.</p>
+            </div>
+            
+            
+            <!-- Registration Form-->
+            <form action="/registration" method="POST" id="registration-form" class="form-right">
+            
+                <!-- Registration -->
+                <div class="form-container">
+                    <label for="user_name">UserName</label>
+                    <input name="user_name" type="text" id="user_name"   required/>
+                </div>
+
+                <div class="form-container">
+                    <label for="user_email">Email</label>
+                    <input name="user_email" type="email" id="user_email"  required/>
+                </div>
+
+                <div class="form-container">
+                    <label for="user_paswword" >Password</label>
+                    <input name="user_password" type="password" id="user_password" pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$" autocomplete="on" required />
+                </div>
+
+                <div class="criteria">
+                    <p class="criteria-text">Passwords must contain at least 8 characters, 
+                        including at least 1 letter and 1 number 
+                    </p>
+                </div>
+
+                <div class="form-container">
+                    <label for="user_age" >Age <img class="question" src="assets/question.png" alt="question mark" required></label>
+                    <input name="user_password" type="number" id="user_age"  />
+                </div>
+                <!-- /Registration-->
+
+                <!-- Recaptcha Demo -->
+                <div class="cap-container">
+                    <img class="recap" src="assets/recaptcha.png" alt="recaptcha box" />
+                </div>
+                <!-- /Recaptcha Demo -->
+                
+                
+                
+
+                <!-- Submit and open Account Success Pop-up? -->
+                <div class="form-container">
+                    <input type="submit" id="sign-up" class="submit-signup" value="Sign up" />
+                </div>
+                <!-- /Submit and open Email Sent Pop-up? -->
+
+                <!-- Agree to terms -->
+                <p class="reg-terms">
+                    By clicking "Sign up", you agree to our terms of service, privacy policy
+                    and cookie policy
+                </p>
+                <!-- /Agree to terms -->
+                <div class="existing-account">
+                    <p class="existing-account-p">Already have an account?<a href="Landing-login.html" > Log in</a></p>
+                </div>                      
+            </form>
+            <!-- /Registration Form-->
+        </div>
+        
+    </section>
+    <!-- /Register Window -->
+    
+    
+
+    <!-- Account Confirmed Pop-up -->
+    <section id="accountConfirmed" class="acct-confirmed">
+        <div class="confirm-content">
+            <div class="confirm-header">
+                <h2>Success!</h2>
+            </div>
+            <div class="confirm-p">
+                <p id="confirm-reply"> You have successfully created an account.
+                    You will use <strong>donnanoble@gmail.com</strong> to log in.
+                </p>
+                <p id="m1-confirm-reply"> You have successfully created an account.
+                   
+                </p>
+                <p id="m2-confirm-reply">You will use <strong>donnanoble@gmail.com</strong> to log in.</p>
+
+
+                <!-- Button will open link to landing -login page-->
+                <div class="acct-success">
+                    <input type="submit" class="btn-acct-success" id="acc-ok" value="OK" />
+                </div>
+
+                <!-- /Button will open link to landing -login page -->
+            </div>
+        </div>
+    </section>
+    <!-- /Account Confirmed Pop-up -->
+
+   
+    
+
+
+
+    <script src="landing-login.js"></script>
+        
+
+</body>
+</html>
