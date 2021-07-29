@@ -117,13 +117,13 @@ body {
 }
 .acct-success {
     height: 60px;
-    width: auto;
+    
     display: flex;
     justify-content: flex-end;
     align-content: flex-end;
 }
 
-.btn-acct-success {
+.btn-reset-success {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -260,6 +260,7 @@ a.go-to-landing{
     #m1-confirm-reply,
     #m2-confirm-reply {
         width: auto;
+        display: block;
         height: 75px;
         font-size: 1.1em;
         padding: var(--fs-xxsmall);
@@ -269,8 +270,7 @@ a.go-to-landing{
     .acct-success {
         margin: 0;
     }
-    .btn-acct-success {
+    .btn-reset-success {
         padding-right: 5px;
-        width: 100px;
     }     
 }

@@ -247,7 +247,7 @@ a {
 
 /* Closeout button X */
 .closeout {
-    width: quto;
+    width: auto;
     display: flex;
     justify-content: flex-end;
     align-content: flex-end;
@@ -266,3 +266,10 @@ a {
     border-radius: 3px;
 }
 
+/* max-width 500px*/
+/* @media screen and (max-width: 31.25em){
+    .closeout {
+        display: none;
+    }
+
+} */

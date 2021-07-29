@@ -1,3 +1,4 @@
+
 :root {
     --red-rose: 'Red Rose', cursive;
     --red-hat: 'Red Hat Display', sans-serif;
@@ -80,8 +81,8 @@ font-weight: var(--fw-reg);
     border-radius: 15px;
     filter: drop-shadow(0 4px 4px rgba(31, 31, 31, 25%));
 }
-#register {
-    display: none;
+.register-window {
+    display: block;
 }
 
 /* Layout of Form Content */
@@ -104,29 +105,21 @@ font-weight: var(--fw-reg);
     flex-direction: column;
    
 }
-.reg-intro {
+.intro {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
     margin-top: .7rem;
-    width: 400px;
-    
+    width: 396px;
     font-family: var(--red-rose);
     font-size: 36px;
     color: var(--purple);
 }
-.reg-text {
-    display: flex;
-    width: 200px;
-    line-height: 1;
-    
-}
 .button-close {
     margin-right: 0;
-    width: 15px;
 }
-.reg-info {
+.info {
     margin: 0 auto;
     width: 396px;
     font-family: var(--red-hat);
@@ -284,13 +277,13 @@ p.reg-terms {
     .content {
         width: 100%;
     }
-    .reg-intro {
+    .intro {
         width: 255px;
         /* margin: 0 auto; */
         font-size: 26px;
     }
     
-    .reg-info {
+    .info {
         width: 255px;
         margin: 0 auto;
         margin-bottom: .5rem;
