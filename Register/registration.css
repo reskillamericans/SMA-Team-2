@@ -1,0 +1,348 @@
+
+:root {
+    --red-rose: 'Red Rose', cursive;
+    --red-hat: 'Red Hat Display', sans-serif;
+
+    /* FONT-SIZES */
+    --fs-xlarge: 1.615rem;
+    --fs-18px: 1.38rem;
+    --fs-16px: 1.23rem;
+    --fs-large: 1.15rem;
+
+    --fs-medium: 1.07rem;
+    --fs-default: 1rem;
+    --fs-small: .9230r;
+    --fs-xsmall: .846rem;
+    --fs-xxsmall: .769rem;
+
+    /* FONT WEIGHT */
+    --fw-light: 300;
+    --fw-reg: 400;
+    --fw-med: 500;
+    --fw-bold: 700;
+
+    /* TEXT COLORS */
+    --dk: #1E1E1E;
+    --gray: #616161;
+    --lt-gr: #AFB1B2;
+
+    /* BACKGROUND COLORS */
+    --near-bk: #1E1E1E;
+    --very-lt-gray: #CCCCCC;
+    --white: #FFFFFF;
+    --off-white: #F8F8F8;
+    --gray: #949494;
+    --borders: #E1E1E1;
+    --green-content: #7DBF66;
+
+    /* COLORS */
+    --info: #9E8BC7;
+    --success: #5DB040;
+    --warning: #F3BB13;
+    --error: #FC4842;
+    --purple: #603FA7;
+    --btn-green: #8EC779;
+    --shadow: #D1BEFA;
+
+}
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+margin: 0;
+}
+html,
+body {
+font-family: var(--red-hat);
+font-size: 13px;
+font-weight: var(--fw-reg); 
+}
+.app-bg {
+    opacity: 80%;
+}
+/* Registration Window */
+.register-window {
+    position: fixed;
+    width: 460px;
+    height: 700px;
+    left: 50%;
+    top: 40%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    font-size: 1.92rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: var(--white);
+    border: 1px solid var(--borders);
+    border-radius: 15px;
+    filter: drop-shadow(0 4px 4px rgba(31, 31, 31, 25%));
+}
+.register-window {
+    display: block;
+}
+
+/* Layout of Form Content */
+.form-layout {
+    height: auto;
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 0 0;
+    padding: auto 3rem;
+    overflow: hidden;
+}
+.content {
+    width: 460px;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+   
+}
+.intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: .7rem;
+    width: 396px;
+    font-family: var(--red-rose);
+    font-size: 36px;
+    color: var(--purple);
+}
+.button-close {
+    margin-right: 0;
+}
+.info {
+    margin: 0 auto;
+    width: 396px;
+    font-family: var(--red-hat);
+    font-size: var(--fs-16px);
+}
+
+
+/* Styling the form */
+.form-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center; 
+    text-align: center;
+    width: 460px;
+    height: 600px;
+    margin: 0;
+    margin-left: 0;
+    padding: auto;
+    border-top: 1px solid var(--very-lt-gray); 
+}
+.form-container {
+    display: flex;
+    width: 460px;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 1rem auto;
+    flex-direction: column;
+    align-items: center;  
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
+.form-container:nth-child(1) {
+    margin-top: 1rem;
+}
+
+label {
+    width: 396px;
+    text-align: left;
+    margin: .75rem 1rem;
+    margin-bottom: 0;
+    font-size: var(--fs-default);
+    line-height: 1;
+}
+input {
+    box-sizing: border-box;
+    width: 396px;
+    height: 32px;
+    border: 1px solid var(--very-lt-gray);
+    border-radius: 5px;  
+    padding-left: 10px;
+    outline: none;
+}
+input:hover {
+    border: 1px solid var(--info);
+}
+.criteria {
+    text-align: left;
+    width: 400px;
+    margin: auto;
+}
+.criteria-text {
+    
+    /* margin: auto; */
+    margin: 1rem 1.5rem;
+    font-weight: 300; 
+    text-justify: left;
+}
+.criteria-text {
+    font-size: var(--fs-xsmall);
+    font-weight: var(--fw-light);
+}
+.cap-container {
+    width: 396px;
+    text-align: center;
+    margin: 2rem  auto;  
+}
+.recap {
+    width: 302px;
+}
+
+.submit-signup {
+    margin: auto;
+    width: 295px;
+    height: 32px;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    background: var(--very-lt-gray);
+    font-size: var(--fs-medium);
+    font-weight: var(--fw-bold);
+}
+.submit-signup:hover {
+    opacity: 80%;
+}
+p.reg-terms {
+    width: 295px;
+    margin: 1rem auto;
+    margin-bottom: .75rem;
+    font-size: var(--fs-xxsmall);
+    font-weight: var(--fw-light);
+}
+.existing-account {
+    width: 295px;
+    margin: 1rem auto;
+    /* margin-bottom: .75rem; */
+    font-size: var(--fs-xxsmall);
+    font-weight: var(--fw-light);
+}
+
+
+/* max width 600px */
+@media screen and (max-width: 37.5em) {
+    html,
+    body {
+        width: 100%; 
+        height: 100%;  
+    }
+    /* #bg {
+        width: 650px;
+    } */
+    .register-window {
+        width: 289px;
+        height: 555px; 
+        top: 30%;
+        border: 1px solid var(--very-lt-gray);
+        border-radius: 5px;
+        background: white;  
+        filter: none;
+    }
+    
+    .form-layout {
+        width: 289px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        margin-top: 0;
+        background-color: none;
+        
+    }
+    .form-right {
+        height: auto;
+    }
+    .form-right {
+        width: 289px;
+        margin: 0;
+        padding: 0;
+        text-align: center; 
+        margin: auto;
+    }
+    .details {
+        width: 321px;
+    }
+    .content {
+        width: 100%;
+    }
+    .intro {
+        width: 255px;
+        /* margin: 0 auto; */
+        font-size: 26px;
+    }
+    
+    .info {
+        width: 255px;
+        margin: 0 auto;
+        margin-bottom: .5rem;
+        font-size: var(--fs-medium);
+    }
+    .form-container {
+        width: 289px;
+        margin-bottom: .5rem;
+    }
+    .form-container:nth-child(1) {
+        margin-top: .5rem;
+    }
+    .form-container:nth-child(3) {
+        margin-bottom:.5rem;
+    }
+    .form-container>.submit-signup {
+        margin-bottom: 0;
+    }
+    input {
+        width: 255px;
+    }
+    label {
+        width: 255px;
+        margin: .75rem 1.5rem;
+        margin-bottom: 0;
+    }
+    .criteria {
+        width: 289px;
+        text-align: left;
+        margin: 0;
+    }
+    p.criteria-text {
+        width: 255px;
+        margin: 0 auto;
+        line-height: 1;
+    }
+    .question {
+        display: none;
+    }
+    .cap-container {
+        width: 289px;
+        margin: .7rem auto;
+    }
+    .recap {
+        width: 255px;
+    }
+    .submit-signup {
+        width: 255px;
+    }
+    p.reg-terms {
+        width: 217px;
+        margin: 0 auto;
+        font-size: var(--fs-xxsmall);
+        font-weight: var(--fw-reg);
+    }
+    .existing-account-p {
+        width: 160px;
+        margin: .5rem auto;
+        text-align: center;
+        font-weight: var(--fw-robo-bold);
+    }
+}
