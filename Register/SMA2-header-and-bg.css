@@ -51,38 +51,19 @@ body {
     width: 100%;
     height: 100%;
 }
+body {
+    background-image: url("assets/bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: contain;
+}
 
-/* Background image */
-#bg {
-    position: fixed; 
-    top:0;  
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    z-index: -5;
-}
-#bg img {
-    width: 100%;
-    height: 100%;
-    /* display: flex; */
-    position: absolute;
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    margin: auto; 
-    /* min-width: 100%;
-    min-height: 100%; */
-    z-index: -5;
-    
-}
 .header-layout{
     height: 72px;
     display: flex;
     justify-content: space-between;
     background: var(--white);
     padding-top: 0; 
-    z-index: 1000; 
 }
 
 .header-left {
@@ -123,11 +104,9 @@ body {
     font-size: 1.23rem;
     color: black;
     text-decoration: none;
-    z-index: 3;
 }
 a {
     text-decoration: none;
-    z-index: 3;  
 }
 .header-right a:hover {
     color: var(--info);
@@ -145,7 +124,10 @@ a {
         width: 100%;  
         height: 100%;
     }
-
+    body {
+        background-size: 1240px 100%;
+        background-repeat: no-repeat;
+    }
     .header-layout {
         max-width: 100%;
         height: 60px;
@@ -158,7 +140,6 @@ a {
         padding-top: 0;
         padding-bottom: 1rem;  
         border-bottom: 1px solid var(--very-lt-gray);
-        z-index: 2;
     }
     .header-left {
         display: flex;
@@ -202,12 +183,11 @@ a {
         width: 100%;
         height: 100vh;
     }
-    #bg {
-        left: -25%;
-        top: -5%;
-        width: 100%;
+    body {
+        background-size: 770px 100%;
+        background-repeat: no-repeat;
+        background-position: top right;
     }
-    
     .header-layout {
         width: 100%;
         height: auto;
@@ -245,6 +225,15 @@ a {
     }
 }
 
+/* max-screen 600px */
+@media screen and (max-width: 37.5em) {
+    body {
+        background-size: 680px 680px;
+        background-repeat: no-repeat;
+        background-position: top right;
+    }
+}
+
 /* Closeout button X */
 .closeout {
     width: auto;
@@ -265,11 +254,3 @@ a {
     border: 2px solid var(--error);
     border-radius: 3px;
 }
-
-/* max-width 500px*/
-/* @media screen and (max-width: 31.25em){
-    .closeout {
-        display: none;
-    }
-
-} */
