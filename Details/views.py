@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Post, PostCategory
 
 # Create your views here.
@@ -144,3 +144,45 @@ def search_post(request):
             return render(request=request, template_name="search_post.html")
 
     return render(request=request, template_name="search_post.html")
+
+
+# Mock functions.
+def view_posts_mock(request):
+    posts = Post.objects.all()
+
+    result = []
+    for post in posts:
+        if not post.post_category_id:
+            category = "n/a"
+        else:
+            category = post.post_category_id.name
+
+        result.append({
+            "ID": str(post.id),
+            "User ID": str(post.user_id),
+            "Title": post.title,
+            "Content": post.content,
+            "Category": category,
+            "Likes": str(post.likes.count())
+        })
+
+    return JsonResponse(result, safe=False, json_dumps_params={ "indent": 2 })
+
+def view_post_mock(request, post_id):
+    post = Post.objects.get(id=post_id)
+
+    if not post.post_category_id:
+        category = "n/a"
+    else:
+        category = post.post_category_id.name
+
+    result = {
+        "ID": str(post.id),
+        "User ID": str(post.user_id),
+        "Title": post.title,
+        "Content": post.content,
+        "Category": category,
+        "Likes": str(post.likes.count())
+    }
+
+    return JsonResponse(result, safe=False, json_dumps_params={ "indent": 2 })

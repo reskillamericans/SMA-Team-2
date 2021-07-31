@@ -2,6 +2,7 @@ from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import logout_then_login
 from django.contrib import messages #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
@@ -23,6 +24,10 @@ from Details.models import Post, PostComment
 def index(request):
     #return HttpResponse("Welcome, this is the SMA app")
 	return render (request=request, template_name="home.html")
+
+def user_home(request):
+    #return HttpResponse("Welcome, this is the SMA app")
+	return render (request=request, template_name="user_home.html")
 
 def register_request(request):
 	if request.method == 'POST':
@@ -61,14 +66,15 @@ def login_request(request):
 		if user is not None:
 			login(request, user)
 			messages.info(request, f"You are now logged in as {username}.")
-			return redirect("index")
+			return redirect("user_home")
 		else:
 			messages.error(request,"Invalid username or password.")
 			return redirect("login")	
 	
 	return render(request, "login.html")	
 
-
+def logout(request):
+    return logout_then_login(request)
 	
 def edit_user(request):
 	if request.method == 'POST':
