@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const BtnOk = document.getElementById("acc-ok");
     
     
-    // X button on Registration Page to return to landing Page
+    // X  Registration Page to return to landing Page
     BtnReg.addEventListener('click', showLanding);
     function showLanding(){
         register.style.display = "none";
