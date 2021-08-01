@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const register = document.getElementById("register");
+    const bg = document.getElementById("bg-img");
     const confirmAccount = document.getElementById("accountConfirmed");
     const form = document.getElementById("registration-form");
     const userName = document.getElementById("user_name");
@@ -9,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     confirmAccount.style.display ="none";
+    
+
 
 
     form.addEventListener('input', function(e) {

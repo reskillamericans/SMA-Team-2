@@ -124,7 +124,7 @@ body {
     align-content: flex-end;
 }
 
-.btn-reset-success {
+.btn-acct-success {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -212,7 +212,7 @@ a.go-to-landing{
         font-size: 1.5em;
         margin-bottom: 1.5rem;
     }
-    .btn-reset-success {
+    .btn-acct-success {
         display: flex;
         justify-content: center;
         align-content: center;
@@ -268,7 +268,7 @@ a.go-to-landing{
     .acct-success {
         margin: 0;
     }
-    .btn-reset-success {
+    .btn-acct-success {
         padding-right: 5px;
     }     
 }
