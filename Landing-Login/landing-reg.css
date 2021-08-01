@@ -57,9 +57,7 @@ font-family: var(--red-hat);
 font-size: 13px;
 font-weight: var(--fw-reg); 
 }
-.app-bg {
-    opacity: 80%;
-}
+
 /* Registration Window */
 .register-window {
     position: fixed;

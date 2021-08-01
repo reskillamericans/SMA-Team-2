@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const landing = document.getElementById("landing");
+    const bg = document.getElementById("bg-img");
     const loginForm = document.getElementById("login_form")
     const mail = document.getElementById("log_email");
     const password = document.getElementById("old_password");
@@ -16,17 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const age = document.getElementById("user_age");
     const BtnOk = document.getElementById("acc-ok");
     
+    
     // X button on Registration Page to return to landing Page
     BtnReg.addEventListener('click', showLanding);
     function showLanding(){
         register.style.display = "none";
         landing.style.display = "block";
+        bg.style.opacity = "1"; 
     };
 
     // Testing function to see is user can login in and successfully
     function goodLogin(){
         landing.style.display = "none";
         confirmAccount.style.display ="block";
+        bg.style.opacity = ".85"; 
     };
     loginForm.addEventListener('input', function(e) {
         BtnLogin.addEventListener('click', function(e) {
@@ -43,12 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
     create.addEventListener('click', showRegister);
     function showRegister(){
         register.style.display = "block";
+        bg.style.opacity = ".85"; 
         landing.style.display = "none";
+        
     };
 
     // After registration, account is confirmed
     function showConfirmed(){
         register.style.display = "none";
+        bg.style.opacity = ".85"; 
         confirmAccount.style.display = "block";
     };
     
@@ -67,11 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function showLogin(){
         confirmAccount.style.display = "none";
         landing.style.display = "block";
+        bg.style.opacity = "1"; 
         BtnOk.style.backgroundColor = "#9E8BC7"; 
     };
-
-    
-    
-
 
 });
