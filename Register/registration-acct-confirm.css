@@ -123,7 +123,7 @@ body {
     align-content: flex-end;
 }
 
-.btn-reset-success {
+.btn-acct-success {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -181,15 +181,12 @@ a.go-to-landing{
         padding-bottom: 1rem;
     }
     
-    
     #confirm-reply {
         display: block;
         text-align: left;
         font-size: 1.65em;
     }
-    #bg img {
-        display: block;
-    }
+
     .acct-success {
         justify-content: flex-end;
         margin-top: 1rem;
@@ -212,7 +209,7 @@ a.go-to-landing{
         font-size: 1.5em;
         margin-bottom: 1.5rem;
     }
-    .btn-reset-success {
+    .btn-acct-success {
         display: flex;
         justify-content: center;
         align-content: center;

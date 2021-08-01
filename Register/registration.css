@@ -60,8 +60,8 @@ body {
     font-size: 13px;
     font-weight: var(--fw-reg); 
 }
-.app-bg {
-    opacity: 80%;
+#bg-img {
+    opacity: 85%;
 }
 /* Registration Window */
 .register-window {

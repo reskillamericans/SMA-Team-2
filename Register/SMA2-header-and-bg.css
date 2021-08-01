@@ -51,7 +51,9 @@ body {
     width: 100%;
     height: 100%;
 }
-body {
+#bg-img {
+    width: 100%;
+    height: 100%;
     background-image: url("assets/bg.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -124,7 +126,7 @@ a {
         width: 100%;  
         height: 100%;
     }
-    body {
+    #bg-img {
         background-size: 1240px 100%;
         background-repeat: no-repeat;
     }
@@ -147,7 +149,6 @@ a {
         height: 35px;
         flex-direction: row;
         margin: 1.75rem 0;
-        /* margin-left: 5px; */
     }
     .logo {
         width: auto;
@@ -183,7 +184,7 @@ a {
         width: 100%;
         height: 100vh;
     }
-    body {
+    #bg-img {
         background-size: 770px 100%;
         background-repeat: no-repeat;
         background-position: top right;
@@ -227,7 +228,7 @@ a {
 
 /* max-screen 600px */
 @media screen and (max-width: 37.5em) {
-    body {
+    #bg-img {
         background-size: 680px 680px;
         background-repeat: no-repeat;
         background-position: top right;
