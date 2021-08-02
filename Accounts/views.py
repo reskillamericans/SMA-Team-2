@@ -2,7 +2,7 @@ from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib import messages #import messages
+from django.contrib import messages  #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
@@ -16,6 +16,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
 from Details.models import Post, PostComment
+
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -176,9 +178,26 @@ def post_comment_request(request, pk):
 		messages.success(request, "Comment successfully posted")
 		return redirect("index")
 
-	return render(request, "comment.html", {'post':post})
+	return render(request, "comment.html", {'post':post}) 
 
-		
+
+
+def delete_comment(request, id):
+   
+    comment = get_object_or_404('Comment', id=id)
+    try:
+        comment.delete()
+        messages.success(request, 'You have successfully deleted the comment')
+
+    except:
+        messages.warning(request, 'The comment could not be deleted.')
+        return redirect("index")
+
+
+
+
+
+
 
 def follow_user(request, user_name):
     other_user = User.objects.get(username=user_name)

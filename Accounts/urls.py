@@ -13,5 +13,6 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', views.password_reset_confirm_request, name='password_reset_confirm'),
     path('reset/done/', views.password_reset_complete_request, name='password_reset_complete'),
     path('post/<int:pk>/comment', views.post_comment_request, name='comment'),
+    path('delete/<int:pk>/comment/', views.delete_comment, name='delete_comment'),
     path("search_user/", views.search_user, name="search_user"),
     ]
