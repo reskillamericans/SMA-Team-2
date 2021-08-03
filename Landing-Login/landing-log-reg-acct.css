@@ -1,0 +1,273 @@
+/* SMA-2 Registration Popup on Landing Page */
+:root {
+    --red-rose: 'Red Rose', cursive;
+    --red-hat: 'Red Hat Display', sans-serif;
+
+    /* FONT-SIZES */
+    --fs-xlarge: 1.615rem;
+    --fs-18px: 1.38rem;
+    --fs-16px: 1.23rem;
+    --fs-large: 1.15rem;
+
+    --fs-medium: 1.07rem;
+    --fs-default: 1rem;
+    --fs-small: .9230r;
+    --fs-xsmall: .846rem;
+    --fs-xxsmall: .769rem;
+
+    /* FONT WEIGHT */
+    --fw-light: 300;
+    --fw-reg: 400;
+    --fw-med: 500;
+    --fw-bold: 700;
+
+    /* TEXT COLORS */
+    --dk: #1E1E1E;
+    --gray: #616161;
+    --lt-gr: #AFB1B2;
+
+    /* BACKGROUND COLORS */
+    --near-bk: #1E1E1E;
+    --very-lt-gray: #CCCCCC;
+    --white: #FFFFFF;
+    --off-white: #F8F8F8;
+    --gray: #949494;
+    --borders: #E1E1E1;
+    --green-content: #7DBF66;
+
+    /* COLORS */
+    --info: #9E8BC7;
+    --success: #5DB040;
+    --warning: #F3BB13;
+    --error: #FC4842;
+    --purple: #603FA7;
+    --btn-green: #8EC779;
+    --shadow: #D1BEFA;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+html,
+body {
+    font-family: var(--red-hat);
+    font-size: 13px;
+    font-weight: var(--fw-reg);
+    
+}
+
+.acct-confirmed {
+    display: none;
+    position: fixed;
+    width: 459px;
+    height: 271px;
+    min-width: 289px;
+    left: 50%;
+    top: 30%;
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    background-color: var(--off-white);
+    background-color: var(--off-white);
+    border: 1px solid var(--borders);
+    border-radius: 15px;
+    filter: drop-shadow(0 4px 4px rgba(31, 31, 31, 25%));
+}
+.confirm-content {
+    display: flex;
+    flex-direction: column;
+}
+.confirm-header {
+    width: 100%;
+    height: 96px;
+    color: var(--white);
+    background: var(--success);
+    border-radius: 15px 15px 0 0;
+}
+.confirm-header h2 {
+    padding: 30px 20px;
+    font-size: 36px;
+    font-family: var(--red-rose);
+    font-weight: var(--fw-med); 
+}
+
+.confirm-p {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 150px;
+    padding: 10px 20px;
+    padding-right: 2.rem;
+    padding-bottom: 0;
+}
+#confirm-reply {
+    height: 90px;
+    font-size: 20px;
+    padding: 5px 24px;
+    margin-bottom: 1rem;
+}
+#m1-confirm-reply,
+#m2-confirm-reply {
+    display: none;
+}
+.acct-success {
+    height: 60px;
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.btn-acct-success {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: var(--fw-bold);
+    color: var(--success);
+    background-color: var(--white);
+    border: 1px solid var(--success);
+    border-radius: 3px;      
+}
+a.go-to-landing{
+    width: 200px;
+    color: var(--success);
+    background-color: var(--white);
+    text-decoration: none;
+    margin: auto;
+}
+.btn-acct-success:hover,
+.btn-acct-success:focus {
+    opacity: 80%;
+    cursor: pointer;
+}
+
+
+/* max-width 1040px*/
+@media screen and (max-width: 65em) {
+    html,
+    body {
+
+        width: 100%;
+        height: 100%;
+    }
+    .acct-confirmed  {
+        max-width: 90%;
+        min-width: 289px;
+        max-height: 264px;
+        min-height: 225px;
+        margin: 2rem auto;
+    }
+    .confirm-header {
+        height: auto;
+    }
+    .confirm-header h2 {
+        text-align: center;
+        padding: 15px 10px;
+        font-size: 2.3em;
+        margin: auto;  
+    } 
+    .confirm-p {
+        width: 100%;
+        height: 180px;
+        padding: auto;
+        padding-bottom: 1rem;
+    }
+    
+    
+    #confirm-reply {
+        display: block;
+        text-align: left;
+        font-size: 1.65em;
+    }
+    #bg img {
+        display: block;
+    }
+    .acct-success {
+        justify-content: flex-end;
+        margin-top: 1rem;
+    }
+    a.go-to-almost {
+        margin-top: 6px;
+    }
+}
+
+@media screen and (max-width: 48em) {
+    .acc-confirmed {
+        height: 225px;
+    }
+    #confirm-reply {
+        display: none
+    }
+    #m1-confirm-reply,
+    #m2-confirm-reply {
+        display: block;
+        font-size: 1.5em;
+        margin-bottom: 1.5rem;
+    }
+    .btn-reset-success {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 100px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: var(--fw-bold);
+        color: var(--white);
+        background-color: var(--info);
+        border: 1px solid var(--info);
+        border-radius: 3px;      
+    }
+    a.go-to-landing{
+        width: 200px;
+        color: var(--white);
+        background-color: var(--info);
+        text-decoration: none;
+        margin: auto;
+    }
+    
+
+}
+/* max-width 375px */
+@media screen and (max-width: 28.84em) {
+    .acct-confirmed {
+        width: auto;
+        top: 20%;
+    }
+    .confirm-header {
+        height: auto;
+        font-size: .81em;
+    }
+    .confirm-p {
+        align-content: center;
+        height: 150px;
+        width: 257px;
+        align-content: center;
+        margin: 1rem;
+        margin-bottom: 2rem;
+        padding: 0;
+    }
+    #confirm-replay {
+        display: none;
+    }
+    #m1-confirm-reply,
+    #m2-confirm-reply {
+        width: auto;
+        height: 75px;
+        font-size: 1.1em;
+        padding: var(--fs-xxsmall);
+        padding: 0 .5rem;
+        line-height: 1.2;  
+    }
+    .acct-success {
+        margin: 0;
+    }
+    .btn-acct-success {
+        padding-right: 5px;
+        width: 100px;
+    }     
+}

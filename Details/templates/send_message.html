@@ -1,0 +1,29 @@
+{% include "header.html" %}
+
+{% block content %}
+
+
+{% if error %}
+{{ error }}
+{% endif %}
+
+<!--Send_message-->
+<div class="container py-5">
+    <h1>Send a Message</h1>
+    {% for message in messageobjs %}
+    <p>{{message.content}}</p>
+    {% endfor %}
+
+    {% for user in users %}
+    {{ user.id }}
+
+    <form action="{% url 'Details:send_user_message' user.id %}" method="POST">
+        {% csrf_token %}
+        Message: <br/><textarea cols="35" rows="8" name="messageobj" required></textarea><br/>
+        <input type="submit" value="Send"/>
+    </form>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

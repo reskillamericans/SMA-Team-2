@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import django_on_heroku
+import django_on_heroku 
 
 
 # Extending User Model Using a Custom Model Extending AbstractUser

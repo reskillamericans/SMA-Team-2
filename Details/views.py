@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponse
-from .models import Post, PostCategory
+from Accounts.models import User
+from .models import Post, PostCategory, Message
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 
@@ -118,9 +119,35 @@ def unlike_post(request, post_id):
     return HttpResponse()
 
 
+def send_message(request):
+    if not request.user.is_authenticated:
+        return redirect("index")
+
+    users = User.objects.all()
+    messageobjs = Message.objects.filter(receiver_id=request.user)
+    context = {'users': users, 'messageobjs':messageobjs}
+
+    return render(request, 'send_message.html', context)
 
 
+def send_user_message(request, id):
+    if request.method == 'POST':
+        try:
+            receiver = get_object_or_404(User, id=id)
+        except User.DoesNotExist:
+            messages.error("User does not exist")
+            return redirect("index")
 
+        if not request.POST.get('messageobj'):
+            context = {'error': 'The message was not successfully sent. Please enter content'}
+            return render(request, 'send_message.html', context)
+        message = Message()
+        message.sender_id = request.user
+        message.receiver_id = receiver
+        message.content = request.POST.get('messageobj')
+        message.save()
+        messages.success(request, "Your message was successfully sent")
+    return redirect('Details:send_message')
 
 
 def search_post(request):
@@ -144,3 +171,45 @@ def search_post(request):
             return render(request=request, template_name="search_post.html")
 
     return render(request=request, template_name="search_post.html")
+
+
+# Mock functions.
+def view_posts_mock(request):
+    posts = Post.objects.all()
+
+    result = []
+    for post in posts:
+        if not post.post_category_id:
+            category = "n/a"
+        else:
+            category = post.post_category_id.name
+
+        result.append({
+            "ID": str(post.id),
+            "User ID": str(post.user_id),
+            "Title": post.title,
+            "Content": post.content,
+            "Category": category,
+            "Likes": str(post.likes.count())
+        })
+
+    return JsonResponse(result, safe=False, json_dumps_params={ "indent": 2 })
+
+def view_post_mock(request, post_id):
+    post = Post.objects.get(id=post_id)
+
+    if not post.post_category_id:
+        category = "n/a"
+    else:
+        category = post.post_category_id.name
+
+    result = {
+        "ID": str(post.id),
+        "User ID": str(post.user_id),
+        "Title": post.title,
+        "Content": post.content,
+        "Category": category,
+        "Likes": str(post.likes.count())
+    }
+
+    return JsonResponse(result, safe=False, json_dumps_params={ "indent": 2 })

@@ -1,0 +1,18 @@
+{% extends "header.html" %}
+
+{% block content %} 
+  
+
+<!--Delete Comment--> 
+<div class="container py-5">
+	<form action = "{% url 'comment_delete' %}" method = "POST">
+        {% csrf_token %}
+        <input type="hidden" name="comment_id" value="{{ comment.id }}"/>
+        <input type="hidden" name="posts_id" value="{{ posts.id }}"/>
+        <button>Delete</button>
+    </form>
+</div>
+
+{% endblock %}
+
+
