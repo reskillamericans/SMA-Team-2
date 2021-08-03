@@ -1,0 +1,9 @@
+{% extends "header.html" %}
+
+{% block content %} 
+
+<h1>Welcome, this is the SMA APP</h1>
+
+[ <a href="{% url 'profile' %}">profile</a> | <a href="{% url 'search_user' %}">search user</a> | <a href="{% url 'view_posts_mock' %}">view posts (mock)</a> | <a href="{% url 'create_post' %}">create post</a> | <a href="{% url 'search_post' %}">search post</a> | <a href="{% url 'logout' %}">logout</a> ]
+
+{% endblock %}
