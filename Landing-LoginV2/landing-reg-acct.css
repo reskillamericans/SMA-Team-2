@@ -1,4 +1,3 @@
-/* SMA-2 Registration Popup on Landing Page */
 :root {
     --red-rose: 'Red Rose', cursive;
     --red-hat: 'Red Hat Display', sans-serif;
@@ -58,6 +57,10 @@ body {
     font-weight: var(--fw-reg);
     
 }
+.app-bg {
+    opacity: 80%;
+}
+/* Account Confirmed PopUp styling */
 
 .acct-confirmed {
     display: none;
@@ -144,6 +147,9 @@ a.go-to-landing{
 .btn-acct-success:focus {
     opacity: 80%;
     cursor: pointer;
+    color: var(--white);
+    background: var(--purple);
+    border: none;
 }
 
 
@@ -236,7 +242,7 @@ a.go-to-landing{
 @media screen and (max-width: 28.84em) {
     .acct-confirmed {
         width: auto;
-        top: 20%;
+        top: 30%;
     }
     .confirm-header {
         height: auto;
