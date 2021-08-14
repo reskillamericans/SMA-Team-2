@@ -247,7 +247,7 @@ a {
 
 /* Closeout button X */
 .closeout {
-    width: quto;
+    width: auto;
     display: flex;
     justify-content: flex-end;
     align-content: flex-end;
