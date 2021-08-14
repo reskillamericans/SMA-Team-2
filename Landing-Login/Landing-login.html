@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Red+Rose:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="SMA2-landing-header-and-bg.css">
-    <link rel="stylesheet" href="landing-log.css">
-    <link rel="stylesheet" href="landing-log-reg.css">
-    <link rel="stylesheet" href="landing-log-reg-acct.css">
+    <link rel="stylesheet" href="SMA2-header-and-bg.css">
+    <link rel="stylesheet" href="landing-login.css">
+    <link rel="stylesheet" href="landing-reg.css">
+    <link rel="stylesheet" href="landing-reg-acct.css">
 
 
     
@@ -31,16 +31,20 @@
         </div>
         
         <div class="header-right" id="right">
-            <a class="links" href="#" alt="link to landing page">Home</a>
-            <a class="links" href="#" alt="link to login page">Log in</a>
-            <a class="links" href="registration.html" alt="link to registration page">Sign Up</a>
+            <a class="links" id="home" href="#" alt="landing page link">Home</a>
+            <a class="links" id="login-pg" href="#" alt="link to login page">Log in</a>
+            <a class="links" id="registration-pg" href="#" alt="link to registration page">Sign Up</a>
             <a class="links" href="#">About Us</a>
         </div>
     </div>
  
     <!-- /HEADER -->
-
-    <div id="bg-img"></div>
+    
+    <!-- BACKGROUND IMAGE -->
+    <div id="bg">
+        <img id="img-bg" class="app-bg" src="assets/bg.png" alt="">
+    </div>
+    <!-- /BACKGROUND IMAGE -->
 
     <!-- Landing Page - Login -->
     <section class="landing-login" id="landing">
@@ -51,7 +55,6 @@
                     <div class="landing-details-header">
                         <img class="body-logo" src="assets/SMA-logo-m1.svg"  width=166.53 height=96 alt="SMA-logo" />
                         <span class="number">2</span>
-                       
                     </div>
                     <div class="landing-details-text">
                         <p class="connect">connect with a</p>
@@ -62,19 +65,19 @@
             </div>
 
             
-                <form action="/login" method="POST" id="login_form" class="landing-form-right login-sheet">
+                <form action="/login" method="POST" id="login-form" class="landing-form-right login-sheet">
                 
                     <!-- Email -->
                     <div class="landing-form-container">
-                        <label for="log_email">Email</label>
-                        <input class="login-email" name="log_email" type="email" id="log_email" autocomplete="on" required/>
+                        <label for="email">Email</label>
+                        <input class="login-email" name="email" type="email" id="email" autocomplete="on" required/>
                     </div>
                     <!-- /Email-->
 
                     <!-- Password-->
                     <div class="landing-form-container">
-                        <label for="log_password">Password</label>
-                        <input class="login-pwd" name="log_password" type="password" id="old_password" autocomplete="on" required/>
+                        <label for="password">Password</label>
+                        <input class="login-pwd" name="password" type="password" id="password" required/>
                     </div>
                     <!-- /Password-->
 
@@ -109,16 +112,16 @@
     <section class="register-window" id="register">
         
 
-        <div class="form-layout">
-            <div class="content">
+        <div class="reg-form-layout">
+            <div class="reg-content">
                 <!-- X TO CLOSE WINDOW -->
                 <div class="reg-intro">
                     <p class="reg-text">Sign Up</p> 
                     <p class="closeout">
                         <button id="registrationClose" class="button-close" type="button">
-                            <!-- <a href="/Landing-Login/Landing-login.html" alt="link to landing page"> -->
+                            
                                 <img src="assets/X.svg">
-                            <!-- </a> -->
+                            
                         </button>
                     </p>
                     
@@ -128,48 +131,63 @@
             
             
             <!-- Registration Form-->
-            <form action="/registration" method="POST" id="registration-form" class="form-right">
+            <form action="/registration" method="POST" id="registration-form" class="reg-form">
             
                 <!-- Registration -->
-                <div class="form-container">
-                    <label for="user_name">UserName</label>
-                    <input name="user_name" type="text" id="user_name"   required/>
+                <div class="reg-form-container">
+                    <label for="username">Username</label>
+                    <input name="username" type="text" id="username" required/>
                 </div>
 
-                <div class="form-container">
-                    <label for="user_email">Email</label>
-                    <input name="user_email" type="email" id="user_email"  required/>
+                <div class="reg-form-container">
+                    <label for="first_name">First Name</label>
+                    <input name="first_name" type="text" id="first_name" required/>
                 </div>
 
-                <div class="form-container">
-                    <label for="user_paswword" >Password</label>
-                    <input name="user_password" type="password" id="user_password" pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$" autocomplete="on" required />
+                <div class="reg-form-container">
+                    <label for="last_name">Last Name</label>
+                    <input name="last_name" type="text" id="last_name" required/>
+                </div>
+
+                <div class="reg-form-container">
+                    <label for="new_email">Email</label>
+                    <input name="new_email" type="email" id="new_email"  required/>
+                </div>
+
+                <div class="reg-form-container">
+                    <label for="new_paswword" >Password</label>
+                    <input name="new_password" type="password" id="new_password"  required />
+                </div>
+
+                <div class="reg-form-container">
+                    <label for="conf_paswword" >Password</label>
+                    <input name="conf_password" type="password" id="conf_password"  required />
                 </div>
 
                 <div class="criteria">
-                    <p class="criteria-text">Passwords must contain at least 8 characters, 
+                    <!-- <p class="criteria-text">Passwords must contain at least 8 characters, 
                         including at least 1 letter and 1 number 
-                    </p>
+                    </p> -->
                 </div>
 
-                <div class="form-container">
+                <div class="reg-form-container">
                     <label for="user_age" >Age <img class="question" src="assets/question.png" alt="question mark" required></label>
-                    <input name="user_password" type="number" id="user_age"  />
+                    <input name="user_age" type="number" id="user_age"  />
                 </div>
                 <!-- /Registration-->
 
                 <!-- Recaptcha Demo -->
-                <div class="cap-container">
+                <!-- <div class="cap-container">
                     <img class="recap" src="assets/recaptcha.png" alt="recaptcha box" />
-                </div>
+                </div> -->
                 <!-- /Recaptcha Demo -->
                 
                 
                 
 
                 <!-- Submit and open Account Success Pop-up? -->
-                <div class="form-container">
-                    <input type="submit" id="sign-up" class="submit-signup" value="Sign up" />
+                <div class="reg-form-container">
+                    <input type="button" id="sign-up" class="submit-signup" value="Sign up" />
                 </div>
                 <!-- /Submit and open Email Sent Pop-up? -->
 
@@ -180,7 +198,7 @@
                 </p>
                 <!-- /Agree to terms -->
                 <div class="existing-account">
-                    <p class="existing-account-p">Already have an account?<a href="Landing-log.html" > Log in</a></p>
+                    <p class="existing-account-p">Already have an account?<a href="Landing-login.html" > Log in</a></p>
                 </div>                      
             </form>
             <!-- /Registration Form-->
@@ -218,13 +236,13 @@
     </section>
     <!-- /Account Confirmed Pop-up -->
 
-
-    <footer class="footer">
-        <img class="footer-content" src="assets/SMA-2-footer.svg">
-    </footer>
+   
+    
 
 
-    <script src="landing-log.js"></script>
+
+    <script src="landing-login.js"></script>
         
+
 </body>
 </html>

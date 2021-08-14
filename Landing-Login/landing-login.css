@@ -59,7 +59,6 @@ body {
     font-weight: var(--fw-reg); 
 }
 
-
 .landing-login {
     display: block;
     position: fixed;
@@ -248,27 +247,12 @@ body {
     cursor: pointer;
 }
 
-.footer {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    z-index: 3;
-    text-align: center;
-    background: white;
-}
-.footer-content {
-    width: 100%;
-    height: 67px;
-}
-
-
 /* max-width 1240px*/
 @media screen and (max-width: 77.5em){
     .landing-login {
         width: 500px;
         height: 740px;
-        top: 37%;
+        top: 50%;
         justify-content: center;
         align-content: center;
         background-color: none;
@@ -351,10 +335,10 @@ body {
 
 }
 
-/* max width 600px */
-@media screen and (max-width: 37.5em) {
+/* max width 500px */
+@media screen and (max-width: 31.25em) {
     .landing-login {
-        top: 27%;
+        top: 40%;
         height: auto;
         width: 289px;
         border: none;
@@ -486,7 +470,5 @@ body {
         margin-top: 1.4rem;
         font-size: var(--fs-medium);
     }
-    .footer {
-        display: none;
-    }
+
 }
