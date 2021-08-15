@@ -59,7 +59,7 @@ def register_request(request):
 def login_request(request):
 
     if request.user.is_authenticated:
-        return redirect("index")
+        return redirect("user_home")
 
     if request.method == "POST":
         username = request.POST.get('username')
@@ -68,7 +68,7 @@ def login_request(request):
         if user is not None:
             login(request, user)
             messages.info(request, f"You are now logged in as {username}.")
-            return redirect("index")
+            return redirect("user_home")
         else:
             messages.error(request,"Invalid username or password.")
             return redirect("login")
