@@ -65,12 +65,12 @@
             </div>
 
             
-                <form action="/login" method="POST" id="login-form" class="landing-form-right login-sheet">
+                <form action="{% url 'login' %}" method="POST" id="login-form" class="landing-form-right login-sheet">
                 
                     <!-- Email -->
                     <div class="landing-form-container">
-                        <label for="email">Email</label>
-                        <input class="login-email" name="email" type="email" id="email" autocomplete="on" required/>
+                        <label for="username">Username</label>
+                        <input class="login-email" name="username" type="text" id="email" autocomplete="on" required/>
                     </div>
                     <!-- /Email-->
 
@@ -89,18 +89,18 @@
 
                     <!-- Login Button-->
                     <div class="landing-form-container">
-                        <input type='submit' id="btn-login" class="loginbtn" value="Log In" />
+                        <input type='submit' id="btn-login" class="loginbtn" value="Login" />
                     </div>
                     
                     <!-- Desktop Forgot -->
                     <div class="fp">
-                        <a href="#" alt="link to forgot password page">Forgot Password?</a>
+                        <a href="/accounts/password_reset" alt="link to forgot password page">Forgot Password?</a>
                     </div>
                     <!-- Desktop Forgot -->
                     
                     <!-- Create Account Button-->
                     <div class="create-acc">
-                        <button type='submit' id="btn-create" class="create" >Create New Account</button>
+                        <button type='submit' id="btn-create" class="create" ><a href="/accounts/register">Create a new account</a></button>
                     </div>
                     <!-- /Create Account Button-->
                 </form>
