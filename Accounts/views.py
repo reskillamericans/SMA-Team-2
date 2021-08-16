@@ -1,12 +1,12 @@
 from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import  render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import logout_then_login
+from django.contrib.auth import login, authenticate,logout
 from django.contrib import messages #import messages
 from .models import User, PasswordReset
 from Details.models import Follower
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.decorators import login_required
 
 from .models import UserSocial
 from .forms import UserProfileForm
@@ -25,13 +25,19 @@ from django.shortcuts import get_object_or_404
 
 def index(request):
     #return HttpResponse("Welcome, this is the SMA app")
-    return render (request=request, template_name="home.html")
+    if request.user.is_authenticated:
+        return redirect("user_home")
+    return render (request=request, template_name="landing.html")
 
+@login_required()
 def user_home(request):
     #return HttpResponse("Welcome, this is the SMA app")
 	return render (request=request, template_name="user_home.html")
 
 def register_request(request):
+    if request.user.is_authenticated:
+        return redirect("user_home")
+        
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -73,15 +79,22 @@ def login_request(request):
             messages.error(request,"Invalid username or password.")
             return redirect("login")
 
-    return render(request, "login.html")
+    return render(request, "landing.html")
 
 
 
 
 
-def logout(request):
-    return logout_then_login(request)
-  
+def logout_request(request):
+    if request.user.is_authenticated:
+        logout(request)
+        messages.info(request, f"You are now logged out.")
+        return redirect("login")
+
+    return render(request, "landing.html")
+
+
+@login_required()
 def edit_user(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST,instance=UserSocial)
@@ -171,6 +184,7 @@ def password_reset_complete_request(request):
     return render(request=request, template_name="password_reset_complete.html")
 
 
+@login_required()
 def post_comment_request(request, pk):
 
     try:
@@ -191,6 +205,7 @@ def post_comment_request(request, pk):
     return render(request, "comment.html", {'post':post})
 
 
+@login_required()
 def delete_comment(request, id):
     comment = get_object_or_404('Comment', id=id)
     try:
@@ -201,6 +216,7 @@ def delete_comment(request, id):
     return redirect("index")
 
 
+@login_required()
 def follow_user(request, user_name):
     other_user = User.objects.get(username=user_name)
     session_user = request.session['user']
@@ -223,6 +239,7 @@ def follow_user(request, user_name):
         return redirect(f'/profile/{session_user}')
 
 
+@login_required()
 def search_user(request):
 
     if request.method == "POST":
