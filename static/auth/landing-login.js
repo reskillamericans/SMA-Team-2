@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const landing = document.getElementById("landing");
     const loginForm = document.getElementById("login-form")
-    const mail = document.getElementById("email");
+    const mail = document.getElementById("username");
     const password = document.getElementById("password");
     const BtnLogin = document.getElementById("btn-login");
     const BtnCreate = document.getElementById("btn-create");
@@ -19,15 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const BtnReg = document.getElementById("registrationClose");
     
     const regForm = document.getElementById("registration-form");
-    const username = document.getElementById("username");
+    const username = document.getElementById("reg_username");
     const fname = document.getElementById("first_name");
     const lname = document.getElementById("last_name");
     
-    const email = document.getElementById("new_email");
-    const n_password = document.getElementById("new_password");
+    const email = document.getElementById("reg_email");
+    const n_password = document.getElementById("reg_password");
     const c_password = document.getElementById("conf_password");
     const BtnSignup = document.getElementById("sign-up");
-    const age = document.getElementById("user_age");
+    // const age = document.getElementById("user_age");
     const BtnOk = document.getElementById("acc-ok");
 
     // Account Confirmed Success
@@ -70,13 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Testing function to see is user can login in and successfully
     function goodLogin(){
         BtnLogin.style.backgroundColor = "#9E8BC7";   
+        BtnLogin.style.cursor = "pointer";   
     };
       
     BtnLogin.addEventListener('click', function(e) {
         e.preventDefault();
-        if(mail.validity.valid && password.validity.valid) {
+        if(mail.value != '' && password.value != '') {
             goodLogin();   
         };
+        loginForm.submit();
     });  
 
 
@@ -107,9 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
    
     BtnSignup.addEventListener('click', function(e) {
         e.preventDefault();
-        if(username.value !=='' && fname.value !=='' && lname.value !=='' 
-            && email.validity.valid && n_password.value == c_password.value && age.value >= 13) { 
-            showConfirmed();
+        if(username.value != '' && fname.value !='' && lname.value !='' 
+            && email.value != '' && n_password.value == c_password.value) { 
+            regForm.submit();
         };
     });
     
